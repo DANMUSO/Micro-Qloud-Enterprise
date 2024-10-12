@@ -2,31 +2,30 @@
 <html lang="en">
 
 
-<!-- Mirrored from codervent.com/rocker/demo/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:00:08 GMT -->
+<!-- Mirrored from codervent.com/rocker/demo/vertical/form-radios-and-checkboxes.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:02:21 GMT -->
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link rel="icon" href="{{asset('vertical/assets/images/favicon-32x32.png')}}" type="image/png"/>
+	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
 	<!--plugins-->
-	<link href="{{asset('vertical/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
-	<link href="{{asset('vertical/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
-	<link href="{{asset('vertical/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
-	<link href="{{asset('vertical/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet"/>
+	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 	<!-- loader-->
-	<link href="{{asset('vertical/assets/css/pace.min.css')}}" rel="stylesheet"/>
-	<script src="{{asset('vertical/assets/js/pace.min.js')}}"></script>
+	<link href="assets/css/pace.min.css" rel="stylesheet" />
+	<script src="assets/js/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
-	<link href="{{asset('vertical/assets/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{asset('vertical/assets/css/bootstrap-extended.css')}}" rel="stylesheet">
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/bootstrap-extended.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
-	<link href="{{asset('vertical/assets/css/app.css')}}" rel="stylesheet">
-	<link href="{{asset('vertical/assets/css/icons.css')}}" rel="stylesheet">
+	<link href="assets/css/app.css" rel="stylesheet">
+	<link href="assets/css/icons.css" rel="stylesheet">
 	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="{{asset('vertical/assets/css/dark-theme.css')}}"/>
-	<link rel="stylesheet" href="{{asset('vertical/assets/css/semi-dark.css')}}"/>
-	<link rel="stylesheet" href="{{asset('vertical/assets/css/header-colors.css')}}"/>
+	<link rel="stylesheet" href="assets/css/dark-theme.css" />
+	<link rel="stylesheet" href="assets/css/semi-dark.css" />
+	<link rel="stylesheet" href="assets/css/header-colors.css" />
 	<title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
@@ -388,9 +387,10 @@
 					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
 					</div>
 
-					  <div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
-					     <a href="avascript:;" class="btn d-flex align-items-center"><i class='bx bx-search'></i>Search</a>
-					  </div>
+					<div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
+						<a href="avascript:;" class="btn d-flex align-items-center"><i class='bx bx-search'></i>Search</a>
+					 </div>
+
 
 					  <div class="top-menu ms-auto">
 						<ul class="navbar-nav align-items-center gap-1">
@@ -424,6 +424,7 @@
 								<a class="nav-link dark-mode-icon" href="javascript:;"><i class='bx bx-moon'></i>
 								</a>
 							</li>
+
 							<li class="nav-item dropdown dropdown-app">
 								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown" href="javascript:;"><i class='bx bx-grid-alt'></i></a>
 								<div class="dropdown-menu dropdown-menu-end p-0">
@@ -998,531 +999,227 @@
 		<!--start page wrapper -->
 		<div class="page-wrapper">
 			<div class="page-content">
-				<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-                   <div class="col">
-					 <div class="card radius-10 border-start border-0 border-4 border-info">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div>
-									<p class="mb-0 text-secondary">Total Orders</p>
-									<h4 class="my-1 text-info">4805</h4>
-									<p class="mb-0 font-13">+2.5% from last week</p>
-								</div>
-								<div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i class='bx bxs-cart'></i>
-								</div>
-							</div>
-						</div>
-					 </div>
-				   </div>
-				   <div class="col">
-					<div class="card radius-10 border-start border-0 border-4 border-danger">
-					   <div class="card-body">
-						   <div class="d-flex align-items-center">
-							   <div>
-								   <p class="mb-0 text-secondary">Total Revenue</p>
-								   <h4 class="my-1 text-danger">$84,245</h4>
-								   <p class="mb-0 font-13">+5.4% from last week</p>
-							   </div>
-							   <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i class='bx bxs-wallet'></i>
-							   </div>
-						   </div>
-					   </div>
-					</div>
-				  </div>
-				  <div class="col">
-					<div class="card radius-10 border-start border-0 border-4 border-success">
-					   <div class="card-body">
-						   <div class="d-flex align-items-center">
-							   <div>
-								   <p class="mb-0 text-secondary">Bounce Rate</p>
-								   <h4 class="my-1 text-success">34.6%</h4>
-								   <p class="mb-0 font-13">-4.5% from last week</p>
-							   </div>
-							   <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-bar-chart-alt-2' ></i>
-							   </div>
-						   </div>
-					   </div>
-					</div>
-				  </div>
-				  <div class="col">
-					<div class="card radius-10 border-start border-0 border-4 border-warning">
-					   <div class="card-body">
-						   <div class="d-flex align-items-center">
-							   <div>
-								   <p class="mb-0 text-secondary">Total Customers</p>
-								   <h4 class="my-1 text-warning">8.4K</h4>
-								   <p class="mb-0 font-13">+8.4% from last week</p>
-							   </div>
-							   <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i class='bx bxs-group'></i>
-							   </div>
-						   </div>
-					   </div>
-					</div>
-				  </div> 
-				</div><!--end row-->
 
-				<div class="row">
-                   <div class="col-12 col-lg-8 d-flex">
-                      <div class="card radius-10 w-100">
-						<div class="card-header">
-							<div class="d-flex align-items-center">
-								<div>
-									<h6 class="mb-0">Sales Overview</h6>
-								</div>
-								<div class="dropdown ms-auto">
-									<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-									</a>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="javascript:;">Action</a>
-										</li>
-										<li><a class="dropdown-item" href="javascript:;">Another action</a>
-										</li>
-										<li>
-											<hr class="dropdown-divider">
-										</li>
-										<li><a class="dropdown-item" href="javascript:;">Something else here</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						  <div class="card-body">
-							<div class="d-flex align-items-center ms-auto font-13 gap-2 mb-3">
-								<span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i>Sales</span>
-								<span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i>Visits</span>
-							</div>
-							<div class="chart-container-1">
-								<canvas id="chart1"></canvas>
-							  </div>
-						  </div>
-						  <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">24.15M</h5>
-								<small class="mb-0">Overall Visitor <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-							  </div>
-							</div>
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">12:38</h5>
-								<small class="mb-0">Visitor Duration <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-							  </div>
-							</div>
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">639.82</h5>
-								<small class="mb-0">Pages/Visit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-							  </div>
-							</div>
-						  </div>
-					  </div>
-				   </div>
-				   <div class="col-12 col-lg-4 d-flex">
-                       <div class="card radius-10 w-100">
-						<div class="card-header">
-							<div class="d-flex align-items-center">
-								<div>
-									<h6 class="mb-0">Trending Products</h6>
-								</div>
-								<div class="dropdown ms-auto">
-									<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-									</a>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="javascript:;">Action</a>
-										</li>
-										<li><a class="dropdown-item" href="javascript:;">Another action</a>
-										</li>
-										<li>
-											<hr class="dropdown-divider">
-										</li>
-										<li><a class="dropdown-item" href="javascript:;">Something else here</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						   <div class="card-body">
-							<div class="chart-container-2">
-								<canvas id="chart2"></canvas>
-							  </div>
-						   </div>
-						   <ul class="list-group list-group-flush">
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Jeans <span class="badge bg-success rounded-pill">25</span>
-							</li>
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">T-Shirts <span class="badge bg-danger rounded-pill">10</span>
-							</li>
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Shoes <span class="badge bg-primary rounded-pill">65</span>
-							</li>
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Lingerie <span class="badge bg-warning text-dark rounded-pill">14</span>
-							</li>
-						</ul>
-					   </div>
-				   </div>
-				</div><!--end row-->
 
-				 <div class="card radius-10">
-					<div class="card-header">
-						<div class="d-flex align-items-center">
-							<div>
-								<h6 class="mb-0">Recent Orders</h6>
-							</div>
-							<div class="dropdown ms-auto">
-								<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="javascript:;">Action</a>
-									</li>
-									<li><a class="dropdown-item" href="javascript:;">Another action</a>
-									</li>
-									<li>
-										<hr class="dropdown-divider">
-									</li>
-									<li><a class="dropdown-item" href="javascript:;">Something else here</a>
-									</li>
-								</ul>
-							</div>
+				<h6 class="mb-0 text-uppercase">Default Checkbox</h6>
+				<hr>
+			    <div class="card">
+					<div class="card-body">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+							<label class="form-check-label" for="flexCheckDefault">
+							  Default checkbox
+							</label>
+						  </div>
+						  <div class="form-check">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+							<label class="form-check-label" for="flexCheckChecked">
+							  Checked checkbox
+							</label>
+						  </div>
+					</div>
+				</div>
+
+
+				<h6 class="mb-0 text-uppercase">Color Checkbox</h6>
+				<hr>
+			    <div class="card">
+					<div class="card-body">
+
+						<div class="d-flex align-items-center gap-3">
+							<div class="form-check form-check-success">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckSuccess">
+								<label class="form-check-label" for="flexCheckSuccess">
+								  Success checkbox
+								</label>
+							  </div>
+							  <div class="form-check form-check-danger">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckDanger">
+								<label class="form-check-label" for="flexCheckDanger">
+								  Danger checkbox
+								</label>
+							  </div>
+							  <div class="form-check form-check-warning">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckWarning">
+								<label class="form-check-label" for="flexCheckWarning">
+								  Warning checkbox
+								</label>
+							  </div>
+							  <div class="form-check form-check-dark">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckDark">
+								<label class="form-check-label" for="flexCheckDark">
+								  Dark checkbox
+								</label>
+							  </div>
+							  <div class="form-check form-check-secondary">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckSecondary">
+								<label class="form-check-label" for="flexCheckSecondary">
+								  Secondary checkbox
+								</label>
+							  </div>
+							  <div class="form-check form-check-info">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckInfo">
+								<label class="form-check-label" for="flexCheckInfo">
+								  Info checkbox
+								</label>
+							  </div>
+
+
+						</div>
+                         <hr>
+
+						<div class="d-flex align-items-center gap-3">
+							<div class="form-check form-check-success">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedSuccess" checked>
+								<label class="form-check-label" for="flexCheckCheckedSuccess">
+								  Checked Success
+								</label> 
+							  </div>
+							  <div class="form-check form-check-danger">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDanger" checked>
+								<label class="form-check-label" for="flexCheckCheckedDanger">
+								  Checked Success
+								</label> 
+							  </div>
+							  <div class="form-check form-check-warning">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedWarning" checked>
+								<label class="form-check-label" for="flexCheckCheckedWarning">
+								  Checked Warning
+								</label> 
+							  </div>
+							  <div class="form-check form-check-dark">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDark" checked>
+								<label class="form-check-label" for="flexCheckCheckedDark">
+								  Checked Dark
+								</label> 
+							  </div>
+							  <div class="form-check form-check-secondary">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckCheckeSecondary" checked>
+								<label class="form-check-label" for="flexCheckCheckeSecondary">
+								  Checked Secondary
+								</label> 
+							  </div>
+							  <div class="form-check form-check-info">
+								<input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedInfo" checked>
+								<label class="form-check-label" for="flexCheckCheckedInfo">
+								  Checked Info
+								</label> 
+							  </div>
+
+
+						</div>
+
+					</div>
+				</div>
+
+
+				<h6 class="mb-0 text-uppercase">Radios</h6>
+				<hr>
+			    <div class="card">
+					<div class="card-body">
+						<div class="d-flex align-items-center gap-3">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+								<label class="form-check-label" for="flexRadioDefault1">
+								  Default radio
+								</label>
+							  </div>
+							  <div class="form-check form-check-success">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioSuccess">
+								<label class="form-check-label" for="flexRadioSuccess">
+								  Success radio
+								</label>
+							  </div>
+							  <div class="form-check form-check-danger">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDanger">
+								<label class="form-check-label" for="flexRadioDanger">
+								  Danger radio
+								</label>
+							  </div>
+							  <div class="form-check form-check-warning">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioWarning">
+								<label class="form-check-label" for="flexRadioWarning">
+								  Warning radio
+								</label>
+							  </div>
+							  <div class="form-check form-check-dark">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDark">
+								<label class="form-check-label" for="flexRadioDark">
+								  Dark radio
+								</label>
+							  </div>
+							  <div class="form-check form-check-secondary">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioSecondary">
+								<label class="form-check-label" for="flexRadioSecondary">
+								  Secondary radio
+								</label>
+							  </div>
+							  <div class="form-check form-check-info">
+								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioInfo">
+								<label class="form-check-label" for="flexRadioInfo">
+								  Info radio
+								</label>
+							  </div>
 						</div>
 					</div>
-                         <div class="card-body">
-						 <div class="table-responsive">
-						   <table class="table align-middle mb-0">
-							<thead class="table-light">
-							 <tr>
-							   <th>Product</th>
-							   <th>Photo</th>
-							   <th>Product ID</th>
-							   <th>Status</th>
-							   <th>Amount</th>
-							   <th>Date</th>
-							   <th>Shipping</th>
-							 </tr>
-							 </thead>
-							 <tbody><tr>
-							  <td>Iphone 5</td>
-							  <td><img src="assets/images/products/01.png" class="product-img-2" alt="product img"></td>
-							  <td>#9405822</td>
-							  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-							  <td>$1250.00</td>
-							  <td>03 Feb 2020</td>
-							  <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-								  </div></td>
-							 </tr>
-		  
-							 <tr>
-							  <td>Earphone GL</td>
-							  <td><img src="assets/images/products/02.png" class="product-img-2" alt="product img"></td>
-							  <td>#8304620</td>
-							  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-							  <td>$1500.00</td>
-							  <td>05 Feb 2020</td>
-							  <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-								  </div></td>
-							 </tr>
-		  
-							 <tr>
-							  <td>HD Hand Camera</td>
-							  <td><img src="assets/images/products/03.png" class="product-img-2" alt="product img"></td>
-							  <td>#4736890</td>
-							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-							  <td>$1400.00</td>
-							  <td>06 Feb 2020</td>
-							  <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 70%"></div>
-								  </div></td>
-							 </tr>
-		  
-							 <tr>
-							  <td>Clasic Shoes</td>
-							  <td><img src="assets/images/products/04.png" class="product-img-2" alt="product img"></td>
-							  <td>#8543765</td>
-							  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-							  <td>$1200.00</td>
-							  <td>14 Feb 2020</td>
-							  <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-								  </div></td>
-							 </tr>
-							 <tr>
-							  <td>Sitting Chair</td>
-							  <td><img src="assets/images/products/06.png" class="product-img-2" alt="product img"></td>
-							  <td>#9629240</td>
-							  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-							  <td>$1500.00</td>
-							  <td>18 Feb 2020</td>
-							  <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-								  </div></td>
-							 </tr>
-							 <tr>
-							  <td>Hand Watch</td>
-							  <td><img src="assets/images/products/05.png" class="product-img-2" alt="product img"></td>
-							  <td>#8506790</td>
-							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-							  <td>$1800.00</td>
-							  <td>21 Feb 2020</td>
-							  <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 40%"></div>
-								  </div></td>
-							 </tr>
-						    </tbody>
-						  </table>
-						  </div>
-						 </div>
-					</div>
+				</div>
 
 
-					<div class="row">
-						<div class="col-12 col-lg-7 col-xl-8 d-flex">
-						  <div class="card radius-10 w-100">
-							<div class="card-header bg-transparent">
-								<div class="d-flex align-items-center">
-									<div>
-										<h6 class="mb-0">Recent Orders</h6>
-									</div>
-									<div class="dropdown ms-auto">
-										<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-										</a>
-										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="javascript:;">Action</a>
-											</li>
-											<li><a class="dropdown-item" href="javascript:;">Another action</a>
-											</li>
-											<li>
-												<hr class="dropdown-divider">
-											</li>
-											<li><a class="dropdown-item" href="javascript:;">Something else here</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							   </div>
-							 <div class="card-body">
-								<div class="row">
-								  <div class="col-lg-7 col-xl-8 border-end">
-									 <div id="geographic-map-2"></div>
-								  </div>
-								  <div class="col-lg-5 col-xl-4">
-			                       
-									<div class="mb-4">
-									<p class="mb-2"><i class="flag-icon flag-icon-us me-1"></i> USA <span class="float-end">70%</span></p>
-									<div class="progress" style="height: 7px;">
-										 <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: 70%"></div>
-									 </div>
-									</div>
-			   
-									<div class="mb-4">
-									 <p class="mb-2"><i class="flag-icon flag-icon-ca me-1"></i> Canada <span class="float-end">65%</span></p>
-									 <div class="progress" style="height: 7px;">
-										 <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: 65%"></div>
-									 </div>
-									</div>
-			   
-									<div class="mb-4">
-									 <p class="mb-2"><i class="flag-icon flag-icon-gb me-1"></i> England <span class="float-end">60%</span></p>
-									 <div class="progress" style="height: 7px;">
-										 <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: 60%"></div>
-									   </div>
-									</div>
-			   
-									<div class="mb-4">
-									 <p class="mb-2"><i class="flag-icon flag-icon-au me-1"></i> Australia <span class="float-end">55%</span></p>
-									 <div class="progress" style="height: 7px;">
-										 <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style="width: 55%"></div>
-									   </div>
-									</div>
-			   
-									<div class="mb-4">
-									 <p class="mb-2"><i class="flag-icon flag-icon-in me-1"></i> India <span class="float-end">50%</span></p>
-									 <div class="progress" style="height: 7px;">
-										 <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: 50%"></div>
-									   </div>
-									</div>
-
-									<div class="mb-0">
-									   <p class="mb-2"><i class="flag-icon flag-icon-cn me-1"></i> China <span class="float-end">45%</span></p>
-									   <div class="progress" style="height: 7px;">
-										   <div class="progress-bar bg-dark progress-bar-striped" role="progressbar" style="width: 45%"></div>
-										 </div>
-									</div>
-
-								  </div>
-								</div>
-							 </div>
-						   </div>
-						</div>
-			   
-						<div class="col-12 col-lg-5 col-xl-4 d-flex">
-							<div class="card w-100 radius-10">
-						     <div class="card-body">
-							  <div class="card radius-10 border shadow-none">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Total Likes</p>
-											<h4 class="my-1">45.6M</h4>
-											<p class="mb-0 font-13">+6.2% from last week</p>
-										</div>
-										<div class="widgets-icons-2 bg-gradient-cosmic text-white ms-auto"><i class='bx bxs-heart-circle'></i>
-										</div>
-									</div>
-								</div>
-							 </div>
-							 <div class="card radius-10 border shadow-none">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Comments</p>
-											<h4 class="my-1">25.6K</h4>
-											<p class="mb-0 font-13">+3.7% from last week</p>
-										</div>
-										<div class="widgets-icons-2 bg-gradient-ibiza text-white ms-auto"><i class='bx bxs-comment-detail'></i>
-										</div>
-									</div>
-								</div>
-							 </div>
-							 <div class="card radius-10 mb-0 border shadow-none">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Total Shares</p>
-											<h4 class="my-1">85.4M</h4>
-											<p class="mb-0 font-13">+4.6% from last week</p>
-										</div>
-										<div class="widgets-icons-2 bg-gradient-kyoto text-dark ms-auto"><i class='bx bxs-share-alt'></i>
-										</div>
-									</div>
-								</div>
+				<h6 class="mb-0 text-uppercase">Switches</h6>
+				<hr>
+			    <div class="card">
+					<div class="card-body">
+						<div class="d-flex align-items-center gap-3">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1" checked>
+								<label class="form-check-label" for="flexSwitchCheckDefault1">Default Switch</label>
 							  </div>
-							 </div>
+							<div class="form-check form-switch form-check-success">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckSuccess" checked>
+								<label class="form-check-label" for="flexSwitchCheckSuccess">Success Switch</label>
+							  </div>
+							  <div class="form-check form-switch form-check-danger">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDanger" checked>
+								<label class="form-check-label" for="flexSwitchCheckDanger">Danger Switch</label>
+							  </div>
+							  <div class="form-check form-switch form-check-warning">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckWarning" checked>
+								<label class="form-check-label" for="flexSwitchCheckWarning">Warning Switch</label>
+							  </div>
+							  <div class="form-check form-switch form-check-dark">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDark" checked>
+								<label class="form-check-label" for="flexSwitchCheckDark">Dark Switch</label>
+							  </div>
+							  <div class="form-check form-switch form-check-secondary">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckSecondary" checked>
+								<label class="form-check-label" for="flexSwitchCheckSecondary">Secondary Switch</label>
+							  </div>
+							  <div class="form-check form-switch form-check-info">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckInfo" checked>
+								<label class="form-check-label" for="flexSwitchCheckInfo">Infi Switch</label>
+							  </div>
+						
 
-							</div>
-			   
 						</div>
-					 </div><!--end row-->
+					</div>
+				</div>
 
-					 <div class="row row-cols-1 row-cols-lg-3">
-						 <div class="col d-flex">
-                           <div class="card radius-10 w-100">
-							   <div class="card-body">
-								<p class="font-weight-bold mb-1 text-secondary">Weekly Revenue</p>
-								<div class="d-flex align-items-center mb-4">
-									<div>
-										<h4 class="mb-0">$89,540</h4>
-									</div>
-									<div class="">
-										<p class="mb-0 align-self-center font-weight-bold text-success ms-2">4.4% <i class="bx bxs-up-arrow-alt mr-2"></i>
-										</p>
-									</div>
-								</div>
-								<div class="chart-container-0 mt-5">
-									<canvas id="chart3"></canvas>
-								  </div>
-							   </div>
-						   </div>
-						 </div>
-						 <div class="col d-flex">
-							<div class="card radius-10 w-100">
-								<div class="card-header bg-transparent">
-									<div class="d-flex align-items-center">
-										<div>
-											<h6 class="mb-0">Orders Summary</h6>
-										</div>
-										<div class="dropdown ms-auto">
-											<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-											</a>
-											<ul class="dropdown-menu">
-												<li><a class="dropdown-item" href="javascript:;">Action</a>
-												</li>
-												<li><a class="dropdown-item" href="javascript:;">Another action</a>
-												</li>
-												<li>
-													<hr class="dropdown-divider">
-												</li>
-												<li><a class="dropdown-item" href="javascript:;">Something else here</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="chart-container-1 mt-3">
-										<canvas id="chart4"></canvas>
-									  </div>
-								</div>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Completed <span class="badge bg-gradient-quepal rounded-pill">25</span>
-									</li>
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Pending <span class="badge bg-gradient-ibiza rounded-pill">10</span>
-									</li>
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Process <span class="badge bg-gradient-deepblue rounded-pill">65</span>
-									</li>
-								</ul>
-							</div>
-						  </div>
-						  <div class="col d-flex">
-							<div class="card radius-10 w-100">
-								 <div class="card-header bg-transparent">
-									<div class="d-flex align-items-center">
-										<div>
-											<h6 class="mb-0">Top Selling Categories</h6>
-										</div>
-										<div class="dropdown ms-auto">
-											<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-											</a>
-											<ul class="dropdown-menu">
-												<li><a class="dropdown-item" href="javascript:;">Action</a>
-												</li>
-												<li><a class="dropdown-item" href="javascript:;">Another action</a>
-												</li>
-												<li>
-													<hr class="dropdown-divider">
-												</li>
-												<li><a class="dropdown-item" href="javascript:;">Something else here</a>
-												</li>
-											</ul>
-										</div>
-									 </div>
-								 </div>
-								<div class="card-body">
-								   <div class="chart-container-0">
-									 <canvas id="chart5"></canvas>
-								   </div>
-								</div>
-								<div class="row row-group border-top g-0">
-									<div class="col">
-										<div class="p-3 text-center">
-											<h4 class="mb-0 text-danger">$45,216</h4>
-											<p class="mb-0">Clothing</p>
-										</div>
-									</div>
-									<div class="col">
-										<div class="p-3 text-center">
-											<h4 class="mb-0 text-success">$68,154</h4>
-											<p class="mb-0">Electronic</p>
-										</div>
-									 </div>
-								</div><!--end row-->
-							</div>
-						  </div>
-					 </div><!--end row-->
+
+
 
 			</div>
 		</div>
 		<!--end page wrapper -->
 		<!--start overlay-->
-		 <div class="overlay toggle-icon"></div>
+		<div class="overlay toggle-icon"></div>
 		<!--end overlay-->
-		<!--Start Back To Top Button-->
-		  <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2022. All right reserved.</p>
+			<p class="mb-0">Copyright © 2023. All right reserved.</p>
 		</footer>
 	</div>
 	<!--end wrapper-->
-
 
 	<!-- search modal -->
     <div class="modal" id="SearchModal" tabindex="-1">
@@ -1571,6 +1268,7 @@
 		</div>
 	  </div>
     <!-- end search modal -->
+
 
 
 	<!--start switcher-->
@@ -1670,23 +1368,16 @@
 	</div>
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
-	<script src="{{asset('vertical/assets/js/bootstrap.bundle.min.js')}}"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
-	<script src="{{asset('vertical/assets/js/jquery.min.js')}}"></script>
-	<script src="{{asset('vertical/assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
-	<script src="{{asset('vertical/assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
-	<script src="{{asset('vertical/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
-	<script src="{{asset('vertical/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>
-    <script src="{{asset('vertical/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-	<script src="{{asset('vertical/assets/plugins/chartjs/js/chart.js')}}"></script>
-	<script src="{{asset('vertical/assets/js/index.js')}}"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 	<!--app JS-->
-	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
-	<script>
-		new PerfectScrollbar(".app-container")
-	</script>
+	<script src="assets/js/app.js"></script>
 </body>
 
 
-<!-- Mirrored from codervent.com/rocker/demo/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:00:08 GMT -->
+<!-- Mirrored from codervent.com/rocker/demo/vertical/form-radios-and-checkboxes.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:02:21 GMT -->
 </html>
