@@ -236,7 +236,7 @@
 							  <td>KES 5,000</td>
 							  <td>#8506790</td>
 							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Processed</span></td>
-							  <td>KES</td>
+							  <td>KES 5,000</td>
 							  <td>21 Feb 2020</td>
 							 </tr>
 						    </tbody>
