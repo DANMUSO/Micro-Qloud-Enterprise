@@ -198,7 +198,7 @@
 							  <td>KES 5,000</td>
 							  <td>#9405822</td>
 							  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-							  <td>$1250.00</td>
+							  <td>KES 5,000</td>
 							  <td>03 Feb 2020</td>
 							 </tr>
 		  
@@ -206,15 +206,15 @@
 							  <td>KES 3,000</td>
 							  <td>#8304620</td>
 							  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-							  <td>$1500.00</td>
+							  <td>KES 3,000</td>
 							  <td>05 Feb 2020</td>
 							 </tr>
 		  
 							 <tr>
 							  <td>KES 5,000</td>
 							  <td>#4736890</td>
-							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-							  <td>$1400.00</td>
+							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Proccessed</span></td>
+							  <td>KES 5,000</td>
 							  <td>06 Feb 2020</td>
 							 </tr>
 		  
@@ -222,21 +222,21 @@
 							  <td>KES 3,000</td>
 							  <td>#8543765</td>
 							  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-							  <td>$1200.00</td>
+							  <td>KES 3,000</td>
 							  <td>14 Feb 2020</td>
 							 </tr>
 							 <tr>
 							  <td>KES 5,000</td>
 							  <td>#9629240</td>
 							  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-							  <td>$1500.00</td>
+							  <td>KES 5,000</td>
 							  <td>18 Feb 2020</td>
 							 </tr>
 							 <tr>
 							  <td>KES 5,000</td>
 							  <td>#8506790</td>
-							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td>
-							  <td>$1800.00</td>
+							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Processed</span></td>
+							  <td>KES</td>
 							  <td>21 Feb 2020</td>
 							 </tr>
 						    </tbody>
