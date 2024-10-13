@@ -19,8 +19,8 @@ $(function() {
         data: {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           datasets: [{
-            label: 'Laptops',
-            data: [65, 59, 80, 81,65, 59, 80, 81,59, 80, 81,65],
+            label: 'Payments',
+            data: [2005000, 2350000, 2500000, 2500000,2540000, 2560000, 2560000, 3000000,3200000, 3500000,3550000, 3560000],
             borderColor: gradientStroke1,
             backgroundColor: gradientStroke1,
             hoverBackgroundColor: gradientStroke1,
@@ -29,8 +29,8 @@ $(function() {
             borderRadius: 20,
             borderWidth: 0
           }, {
-            label: 'Mobiles',
-            data: [28, 48, 40, 19,28, 48, 40, 19,40, 19,28, 48],
+            label: 'Disbursement',
+            data: [2005000, 2350000, 2500000, 2500000,2540000, 2560000, 2560000, 3000000,3200000, 3500000,3550000, 3560000],
             borderColor: gradientStroke2,
             backgroundColor: gradientStroke2,
             hoverBackgroundColor: gradientStroke2,
@@ -63,13 +63,6 @@ $(function() {
 
  var ctx = document.getElementById("chart2").getContext('2d');
 
-  var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke1.addColorStop(0, '#fc4a1a');
-      gradientStroke1.addColorStop(1, '#f7b733');
-
-  var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke2.addColorStop(0, '#4776e6');
-      gradientStroke2.addColorStop(1, '#8e54e9');
 
 
   var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
@@ -83,22 +76,18 @@ $(function() {
       var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-          labels: ["Jeans", "T-Shirts", "Shoes", "Lingerie"],
+          labels: [ "KES 3,000", "KES 5,000"],
           datasets: [{
             backgroundColor: [
-              gradientStroke1,
-              gradientStroke2,
               gradientStroke3,
               gradientStroke4
             ],
             hoverBackgroundColor: [
-              gradientStroke1,
-              gradientStroke2,
               gradientStroke3,
               gradientStroke4
             ],
-            data: [25, 80, 25, 25],
-			borderWidth: [1, 1, 1, 1]
+            data: [ 2045000, 1550000],
+			borderWidth: [ 1, 1]
           }]
         },
         options: {
