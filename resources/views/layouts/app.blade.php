@@ -51,7 +51,7 @@
 				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="bx bx-donate-blood"></i>
 						</div>
 						<div class="menu-title">Transactions MGT</div>
 					</a>
@@ -74,7 +74,7 @@
 				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="bx bx-line-chart"></i>
 						</div>
 						<div class="menu-title">Clients MGT</div>
 					</a>
@@ -91,7 +91,7 @@
 				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="bx bx-category"></i>
+						<div class="parent-icon"><i class="bx bx-user-circle"></i>
 						</div>
 						<div class="menu-title">Users MGT</div>
 					</a>
