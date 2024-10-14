@@ -46,7 +46,7 @@
 			<!--navigation-->
 			<ul class="metismenu" id="menu">
 				<li>
-						<div class="menu-title">Dashboard</div>
+						<div class="menu-title"><a href="{{url('home')}}">Dashboard</a></div>
 				
 				</li>
 				<li>
@@ -56,19 +56,19 @@
 						<div class="menu-title">Transactions MGT</div>
 					</a>
 					<ul>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Disbursements</a>
+						<li> <a href="{{url('disbursements')}}"><i class='bx bx-radio-circle'></i>Disbursements</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Repayments</a>
+						<li> <a href="{{url('repayments')}}"><i class='bx bx-radio-circle'></i>Repayments</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Loan Request</a>
+						<li> <a href="{{url('loanrequests')}}"><i class='bx bx-radio-circle'></i>Loan Request</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Pending Payments</a>
+						<li> <a href="{{url('pendingpayments')}}"><i class='bx bx-radio-circle'></i>Pending Payments</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Prospect Loanees</a>
+						<li> <a href="{{url('prospectloanees')}}"><i class='bx bx-radio-circle'></i>Prospect Loanees</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Active Loanees</a>
+						<li> <a href="{{url('activeloanees')}}"><i class='bx bx-radio-circle'></i>Active Loanees</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Inactive Loanees</a>
+						<li> <a href="{{url('inactiveloanees')}}"><i class='bx bx-radio-circle'></i>Inactive Loanees</a>
 						</li>
 					</ul>
 				</li>
@@ -79,13 +79,13 @@
 						<div class="menu-title">Clients MGT</div>
 					</a>
 					<ul>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Onboarded Clients</a>
+						<li> <a href="{{url('onboardedclients')}}"><i class='bx bx-radio-circle'></i>Onboarded Clients</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Active Clients</a>
+						<li> <a href="{{url('activeclients')}}"><i class='bx bx-radio-circle'></i>Active Clients</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Inactive Clients</a>
+						<li> <a href="{{url('inactiveclients')}}"><i class='bx bx-radio-circle'></i>Inactive Clients</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Prospect Clients</a>
+						<li> <a href="{{url('prospectclients')}}"><i class='bx bx-radio-circle'></i>Prospect Clients</a>
 						</li>
 					</ul>
 				</li>
@@ -96,13 +96,13 @@
 						<div class="menu-title">Users MGT</div>
 					</a>
 					<ul>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>System Users</a>
+						<li> <a href="{{url('systemusers')}}"><i class='bx bx-radio-circle'></i>System Users</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Roles</a>
+						<li> <a href="{{url('roles')}}"><i class='bx bx-radio-circle'></i>Roles</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Department</a>
+						<li> <a href="{{url('departments')}}"><i class='bx bx-radio-circle'></i>Departments</a>
 						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>Branches</a>
+						<li> <a href="{{url('branches')}}"><i class='bx bx-radio-circle'></i>Branches</a>
 						</li>
 					</ul>
 				</li>
@@ -113,9 +113,7 @@
 						<div class="menu-title">Products MGT</div>
 					</a>
 					<ul>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>KES 3,000 Product</a>
-						</li>
-						<li> <a href="#"><i class='bx bx-radio-circle'></i>KES 5,000 Product</a>
+						<li> <a href="{{url('products')}}"><i class='bx bx-radio-circle'></i>Products</a>
 						</li>
 						
 					</ul>
@@ -239,7 +237,20 @@
 							</li>
 							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-cog fs-5"></i><span>Settings</span></a>
 							
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
+							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>
+								<a class="nav-link" href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+
+                                                        <p> 
+                                                        {{ __('Logout') }}
+                                                        </p>
+                                                        </a>
+
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                            @csrf
+                                                        </form>
+							</span></a>
 							</li>
 						</ul>
 					</div>
