@@ -16,7 +16,7 @@ class BranchesController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Branches');
     }
 
     /**

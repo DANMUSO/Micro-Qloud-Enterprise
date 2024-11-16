@@ -16,7 +16,7 @@ class ProspectclientsController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Prospectclients');
     }
 
     /**

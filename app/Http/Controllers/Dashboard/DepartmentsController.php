@@ -16,7 +16,7 @@ class DepartmentsController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Departments');
     }
 
     /**

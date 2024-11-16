@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Transactions;
 class DisbursementsController extends Controller
 {
     public function __construct()
@@ -16,7 +16,9 @@ class DisbursementsController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transactions::with('employee.company')->where('status', 2)->get();
+
+        return view('Dashboard.Disbursements', compact('transactions'));
     }
 
     /**

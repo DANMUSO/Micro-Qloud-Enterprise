@@ -16,7 +16,7 @@ class InactiveclientsController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Inactiveclients');
     }
 
     /**

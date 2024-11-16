@@ -16,7 +16,7 @@ class InactiveloaneesController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Inactiveloanees');
     }
 
     /**

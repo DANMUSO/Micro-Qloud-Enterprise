@@ -16,7 +16,7 @@ class OnboardedclientsController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Onboardedclients');
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Transactions;
 class LoanrequestsController extends Controller
 {
     public function __construct()
@@ -16,7 +16,8 @@ class LoanrequestsController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transactions::with('employee')->where('status', 0)->get();
+        return view('Dashboard.Loanrequests', compact('transactions'));
     }
 
     /**
