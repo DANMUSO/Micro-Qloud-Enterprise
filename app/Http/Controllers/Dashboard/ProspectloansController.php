@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Prospectclients;
 class ProspectloansController extends Controller
 {
     public function __construct()
@@ -16,7 +16,8 @@ class ProspectloansController extends Controller
      */
     public function index()
     {
-        return view('Dashboard.Prospectloans');
+        $prospects = Prospectclients::get();
+        return view('Dashboard.Prospectloans', compact('prospects'));
     }
 
     /**
