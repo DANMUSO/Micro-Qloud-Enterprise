@@ -107,7 +107,7 @@ class CompaniesController extends Controller
         $staff = $company->staff;
 
         // Return a view with the staff data
-        return view('Dashboard.employees', compact('company', 'staff'));
+        return view('Dashboard.Employees', compact('company', 'staff'));
     }
 
     /**
