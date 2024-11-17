@@ -44,7 +44,7 @@
 													<span class="badge bg-success">Paid</span>
 												@endif	
 									 </td>
-										<td>{{ $transaction->created_at }}</td>
+										<td>{{ $transaction->payroll_date }}</td>
 									</tr>
 								@endforeach
 									
