@@ -51,7 +51,7 @@
     <div class="container">
         <br>
         <h1>Welcome to QPSs, {{ $name }}!</h1>
-        <p>Your account has been created successfully with the following details:</p>
+        <p>Your account has been created successfully with the following Credentials:</p>
         <p><strong>Email:</strong> {{ $email }}</p>
         <p><strong>Password:</strong> {{ $password }}</p>
         <p>Please log in to access advanced loan options and other services.</p>
