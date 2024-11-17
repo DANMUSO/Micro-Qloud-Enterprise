@@ -105,7 +105,7 @@
                 <div class="d-flex align-items-center">
                     <div class="me-3">
                         <p class="mb-0 text-secondary"><b>Loan Duration & Payable Amount</b></p>
-                        <h5 class="my-1 text-success">1 Month</h5>
+                        <h5 class="my-1 text-success">Borrowed amount is payable on the next payroll date.</h5>
                         <p class="mb-0 font-13">Loan Amount: KES {{ Session::get('employee')['amount'] }}</p>
                         <p class="mb-0 font-13">Interest: KES {{ Session::get('employee')['amount'] *0.3 }} </p>
                         <p class="mb-0 font-13"><strong>Total Payable: KES {{ Session::get('employee')['amount'] + Session::get('employee')['amount'] *0.3 }} </strong></p>
