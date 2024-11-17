@@ -32,7 +32,7 @@ class EmployeeCreated extends Mailable
     {
         return new Envelope(
             from: new Address("loan@qloudpointsolutions.com", "Qloud Point Solutions Ltd"),
-            subject: 'Advanced Loan - Your account has been created successfully.'
+            subject: 'Advance Loan - Your account has been created successfully.'
         );
     }
 

@@ -54,9 +54,9 @@
         <p>Your account has been created successfully with the following Credentials:</p>
         <p><strong>Email:</strong> {{ $email }}</p>
         <p><strong>Password:</strong> {{ $password }}</p>
-        <p>Please log in to access advanced loan options and other services.</p>
+        <p>Please log in to access advance loan options and other services.</p>
         <br>
-        <a href="http://3.235.0.52:8000/login">Log in to Get Advanced Loan</a>
+        <a href="http://3.235.0.52:8000/login">Log in to Get Advance Loan</a>
     </div>
 </body>
 </html>
