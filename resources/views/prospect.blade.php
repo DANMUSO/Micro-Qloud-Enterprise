@@ -17,7 +17,9 @@
         <div class="row justify-content-center">
           <div class="col-md-6 col-lg-5">
             <div class="login-wrap p-4 p-md-5">
-          
+          	<center>
+					<img src="{{asset('vertical/assets/images/logo3.png')}}" style="width:70%; height:110px" class="logo-icon" alt="logo icon">
+				</center>
               <h3 class="text-center mb-4">Submit Your Information</h3>
               <form id="ajaxLoginForm" method="POST">
                 @csrf
