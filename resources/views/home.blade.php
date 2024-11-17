@@ -10,6 +10,10 @@
                 <div class="d-flex align-items-center">
                     <div class="me-3">
                         <p class="mb-0 text-secondary"><b>Amount Reserved Just for You</b></p>
+                        <div class="row">
+                   
+
+    <div class="col-md-6">
                         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Loan Summary</h5>
@@ -25,6 +29,23 @@
                 </p>
             </div>
         </div><!-- Example loan amount -->
+        </div>
+        <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Loan Repayment</h5>
+                <hr>
+                <p class="card-text">
+                    <strong>Till No:</strong> 8656636
+                </p>
+                <p class="card-text">
+                    <strong>Total Amount:</strong>  KES {{ Session::get('employee')['amount'] + (Session::get('employee')['amount'] * 0.3) }}
+                </p>
+                <p class="card-text">
+                    <strong>WhatsApp M-PESA Message  to:</strong> 0703894372
+                </p>
+            </div>
+        </div></div></div>
                         <p class="mb-0 font-13"><i>Money will be send to this number <b>{{ Session::get('employee')['phone_no'] }}</b></i></p>
                     </div>
                 </div>
