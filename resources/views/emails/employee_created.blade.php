@@ -56,7 +56,7 @@
         <p><strong>Password:</strong> {{ $password }}</p>
         <p>Please log in to access advanced loan options and other services.</p>
         <br>
-        <a href="https://qloudpointsolutions.com/">Log in to Get Advanced Loan</a>
+        <a href="http://3.235.0.52:8000/login">Log in to Get Advanced Loan</a>
     </div>
 </body>
 </html>

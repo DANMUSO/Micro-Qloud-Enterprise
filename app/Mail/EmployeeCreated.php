@@ -31,7 +31,7 @@ class EmployeeCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
+            from: new Address("loan@qloudpointsolutions.com", "Qloud Point Solutions Ltd"),
             subject: 'Advanced Loan - Your account has been created successfully.'
         );
     }
