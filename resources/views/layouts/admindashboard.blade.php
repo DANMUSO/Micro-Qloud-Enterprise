@@ -364,6 +364,71 @@
 	<!--app JS-->
 	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
 	<script>
+		function payLoan(loanId, status) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You want to update this transaction?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, update it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Send AJAX request to update transaction status
+            $.ajax({
+                url: '/transactions/update-status', // Update with your route URL
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Include CSRF token
+                    id: loanId,
+                    status: status
+                },
+                success: function(response) {
+                    if (response.success) {
+                        swalWithBootstrapButtons.fire(
+                            "Updated!",
+                            "The transaction status has been updated.",
+                            "success"
+                        );
+                        // Optional: Reload the page or update the UI
+                        location.reload();
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                            "Error!",
+                            "Failed to update the transaction.",
+                            "error"
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    swalWithBootstrapButtons.fire(
+                        "Error!",
+                        "Something went wrong. Please try again.",
+                        "error"
+                    );
+                }
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire(
+                "Cancelled",
+                "The transaction is unchanged.",
+                "error"
+            );
+        }
+    });
+}
+
+		</script>
+	<script>
 		function PaymentUpdate(companyId) {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

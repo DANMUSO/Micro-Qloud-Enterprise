@@ -60,6 +60,7 @@
 										<th>Comapny</th>
 										<th>Borrowed Date</th>
 										<th>Status</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -79,6 +80,12 @@
 												
 											</div>
 										</td>
+										<td>
+											<div class="btn-group" role="group" aria-label="Basic example">
+											<button type="button" class="btn btn-outline-success" onclick="payLoan({{ $loanrequest->id }}, 4)">Pay</button>
+												
+											</div>
+										</td>
 									</tr>
 									@endforeach
 									
@@ -94,6 +101,7 @@
 										<th>Comapny</th>
 										<th>Borrowed Date</th>
 										<th>Status</th>
+										<th>Action</th>
 									</tr>
 								</tfoot>
 							</table>

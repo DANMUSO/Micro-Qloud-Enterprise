@@ -74,4 +74,5 @@ Route::post('/loanrequest/status/{id}', [App\Http\Controllers\Dashboard\Transact
 Route::post('/employee/activation/{id}', [App\Http\Controllers\Dashboard\EmployeesController::class, 'update']);
 Route::post('/company/activate-deactivate', [App\Http\Controllers\Dashboard\CompaniesController::class, 'changeStatus'])->name('company.changeStatus');
 Route::post('/payment/update', [App\Http\Controllers\Dashboard\TransactionsController::class, 'updatePayment'])->name('payment.update');
+Route::post('/transactions/update-status', [App\Http\Controllers\Dashboard\TransactionsController::class, 'updateStatus']);
 

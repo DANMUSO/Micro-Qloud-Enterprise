@@ -25,6 +25,16 @@ class TransactionsController extends Controller
        
         return view('Staff.Transactions', compact('transactions') );
     }
+    public function updateStatus(Request $request){
+        $transaction = Transactions::find($request->id);
+        $transaction->status = $request->status;
+    
+        if ($transaction->save()) {
+            return response()->json(['success' => true, 'message' => 'Transaction status updated successfully.']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Failed to update transaction status.']);
+        }
+    }
     public function updatePayment(Request $request)
     {
         $companyId = $request->input('company_id');
