@@ -108,7 +108,7 @@
 						   <div class="d-flex align-items-center">
 							   <div>
 								   <p class="mb-0 text-secondary">Total Active Staff</p>
-								   <h5 class="my-1 text-secondary">10,000</h5>
+								   <h5 class="my-1 text-secondary">{{$activestaffCount}}</h5>
 								   <p class="mb-0 font-13">+8.4% from last week</p>
 							   </div>
 						   </div>
@@ -134,7 +134,7 @@
 						   <div class="d-flex align-items-center">
 							   <div>
 								   <p class="mb-0 text-secondary">Total Inactive Staff</p>
-								   <h5 class="my-1 text-warning">0</h5>
+								   <h5 class="my-1 text-warning">{{$inactivestaffCount}}</h5>
 								   <p class="mb-0 font-13">+100% from last week</p>
 							   </div>
 						   </div>
@@ -164,34 +164,14 @@
 								<canvas id="chart1"></canvas>
 							  </div>
 						  </div>
-						  <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">KES 3,050,000</h5>
-								<small class="mb-0">Overall Payment <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-							  </div>
-							</div>
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">KES 4,500,000</h5>
-								<small class="mb-0">Overall Disbursement <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-							  </div>
-							</div>
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">KES 2,050,000</h5>
-								<small class="mb-0">Income<span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-							  </div>
-							</div>
-						  </div>
 					  </div>
 				   </div>
-				   <div class="col-12 col-lg-4 d-flex">
+				   <div class="col-12 col-lg-6 d-flex">
                        <div class="card radius-10 w-100">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
 								<div>
-									<h6 class="mb-0">Trending Products</h6>
+									<h6 class="mb-0">Payment VS Disbursement</h6>
 								</div>
 							</div>
 						</div>
@@ -201,9 +181,9 @@
 							  </div>
 						   </div>
 						   <ul class="list-group list-group-flush">
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">KES 3,000 <span class="badge bg-success rounded-pill">25%</span>
+							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Disbursements<span class="badge bg-success rounded-pill">25%</span>
 							</li>
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">KES 5,000 <span class="badge bg-danger rounded-pill">10%</span>
+							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Payments <span class="badge bg-danger rounded-pill">10%</span>
 							</li>
 						</ul>
 					   </div>
@@ -223,58 +203,44 @@
 						   <table class="table align-middle mb-0">
 							<thead class="table-light">
 							 <tr>
-							   <th>Product</th>
-							   <th>Product ID</th>
-							   <th>Status</th>
+							   <th>#ID</th>
+							   <th>Borrower</th>
+							   <th>Employeer</th>
 							   <th>Amount</th>
-							   <th>Date</th>
+							   <th>Due Date</th>
+							   <th>Status</th>
 							 </tr>
 							 </thead>
-							 <tbody><tr>
-							  <td>KES 5,000</td>
-							  <td>#9405822</td>
-							  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-							  <td>KES 5,000</td>
-							  <td>03 Feb 2020</td>
-							 </tr>
+							 <tbody>
+								@foreach($recenttrans as $transaction)
+								<tr>
+									<td>#{{ $loop->iteration }}</td>
+									<td>
+										<div class="d-flex align-items-center">
+											<div class="ms-2">
+												<h6 class="mb-0 font-14">{{ $transaction->employee->name }}</h6>
+											</div>
+										</div>
+									</td>
+									<td>{{ $transaction->employee->company->company_name }}</td>
+									<td>KES {{ $transaction->amount }}</td>
+									<td>{{ $transaction->payroll_date }}</td>
+									<td>
+									@if ($transaction->status == 0)
+													<span class="badge bg-warning">Pending</span>
+												@elseif ($transaction->status == 2)
+													<span class="badge bg-primary">Approved</span>
+												@elseif ($transaction->status == 3)
+													<span class="badge bg-danger">Declined</span>
+											
+												@elseif ($transaction->status == 4)
+													<span class="badge bg-success">Paid</span>
+												@endif
+									</td>
+								</tr>
+								@endforeach
+								
 		  
-							 <tr>
-							  <td>KES 3,000</td>
-							  <td>#8304620</td>
-							  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-							  <td>KES 3,000</td>
-							  <td>05 Feb 2020</td>
-							 </tr>
-		  
-							 <tr>
-							  <td>KES 5,000</td>
-							  <td>#4736890</td>
-							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Proccessed</span></td>
-							  <td>KES 5,000</td>
-							  <td>06 Feb 2020</td>
-							 </tr>
-		  
-							 <tr>
-							  <td>KES 3,000</td>
-							  <td>#8543765</td>
-							  <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td>
-							  <td>KES 3,000</td>
-							  <td>14 Feb 2020</td>
-							 </tr>
-							 <tr>
-							  <td>KES 5,000</td>
-							  <td>#9629240</td>
-							  <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td>
-							  <td>KES 5,000</td>
-							  <td>18 Feb 2020</td>
-							 </tr>
-							 <tr>
-							  <td>KES 5,000</td>
-							  <td>#8506790</td>
-							  <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Processed</span></td>
-							  <td>KES 5,000</td>
-							  <td>21 Feb 2020</td>
-							 </tr>
 						    </tbody>
 						  </table>
 						  </div>
@@ -286,7 +252,7 @@
 			<script>
     $(function() {
         "use strict";
-
+//chart 1
         // Get the context of the canvas element
         var ctx = document.getElementById("chart1").getContext('2d');
         
@@ -342,6 +308,51 @@
                 }
             }
         });
+
+		// chart 2
+
+ var ctx = document.getElementById("chart2").getContext('2d');
+
+
+
+var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
+	gradientStroke3.addColorStop(0, '#ee0979');
+	gradientStroke3.addColorStop(1, '#ff6a00');
+	
+  var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+	gradientStroke4.addColorStop(0, '#42e695');
+	gradientStroke4.addColorStop(1, '#3bb2b8');
+
+	var myChart = new Chart(ctx, {
+	  type: 'doughnut',
+	  data: {
+		labels: [ "Disbursements", "Payments"],
+		datasets: [{
+		  backgroundColor: [
+			gradientStroke3,
+			gradientStroke4
+		  ],
+		  hoverBackgroundColor: [
+			gradientStroke3,
+			gradientStroke4
+		  ],
+		  data: [ <?php echo $totalAmount?>, <?php echo $totalAmountpaid?>],
+		  borderWidth: [ 1, 1]
+		}]
+	  },
+	  options: {
+		maintainAspectRatio: false,
+		cutout: 82,
+		plugins: {
+		  legend: {
+			  display: false,
+		   }
+		}
+		
+	 }
+	});
+
+ 
     });
 </script>
 

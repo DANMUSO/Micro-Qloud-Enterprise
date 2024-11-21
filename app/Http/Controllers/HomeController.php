@@ -37,11 +37,11 @@ class HomeController extends Controller
     $currentMonth = Carbon::now();
     $last12Months = Carbon::now()->subMonths(12);
             // Get the Payments data (status 2) for the last 12 months
-    $paymentsv1 = Transactions::selectRaw('sum(amount) as total_amount, MONTH(created_at) as month')
-    ->where('status', 4)
-    ->whereBetween('created_at', [$last12Months, $currentMonth])
-    ->groupBy('month')
-    ->pluck('total_amount', 'month');
+    $paymentsv1 = Transactions::selectRaw('sum(amount + profit) as total_payment, MONTH(created_at) as month')
+            ->where('status', 4)
+            ->whereBetween('created_at', [$last12Months, $currentMonth])
+            ->groupBy('month')
+            ->pluck('total_payment', 'month');
 
 // Get the Disbursement data (status 4) for the last 12 months
 $disbursementsv1 = Transactions::selectRaw('sum(amount) as total_amount, MONTH(created_at) as month')
@@ -67,13 +67,17 @@ $labels = [
             $disbursement = Transactions::select('amount', "profit")->where('status', 2)->get();
             $paid = Transactions::select('amount', "profit")->where('status', 4)->get();
             $olb = Transactions::select('amount', "profit")->where('status', 5)->get();
+
+            $recenttrans =Transactions::with('employee.company')->latest()->limit(5)->get();
+            $activestaffCount = Employees::where('status', 0)->count();
+            $inactivestaffCount = Employees::where('status', 1)->count();
             Session::put([
                 'userName' =>  $userName,
                 'disbursement' =>  $disbursement,
                 'paid' =>  $paid,
                 'olb' =>  $olb,
             ]);
-            return view('admin', compact('labels', 'paymentData', 'disbursementData'));
+            return view('admin', compact('labels', 'paymentData', 'disbursementData','recenttrans','activestaffCount','inactivestaffCount'));
         }else{
             $email = $user->email;
             $employee = Employees::with('company')->where('email', $email)->first();

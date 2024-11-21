@@ -1,49 +1,6 @@
 $(function() {
 
-// chart 2
 
- var ctx = document.getElementById("chart2").getContext('2d');
-
-
-
-  var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke3.addColorStop(0, '#ee0979');
-      gradientStroke3.addColorStop(1, '#ff6a00');
-	  
-	var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke4.addColorStop(0, '#42e695');
-      gradientStroke4.addColorStop(1, '#3bb2b8');
-
-      var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: [ "KES 3,000", "KES 5,000"],
-          datasets: [{
-            backgroundColor: [
-              gradientStroke3,
-              gradientStroke4
-            ],
-            hoverBackgroundColor: [
-              gradientStroke3,
-              gradientStroke4
-            ],
-            data: [ 2045000, 1550000],
-			borderWidth: [ 1, 1]
-          }]
-        },
-        options: {
-          maintainAspectRatio: false,
-          cutout: 82,
-          plugins: {
-            legend: {
-                display: false,
-             }
-          }
-          
-       }
-      });
-
-   
 
 // worl map
 
