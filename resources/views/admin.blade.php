@@ -181,9 +181,9 @@
 							  </div>
 						   </div>
 						   <ul class="list-group list-group-flush">
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Disbursements<span class="badge bg-success rounded-pill">25%</span>
+							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center border-top">Disbursements<span class="badge bg-danger rounded-pill">100%</span>
 							</li>
-							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Payments <span class="badge bg-danger rounded-pill">10%</span>
+							<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Payments <span class="badge bg-success rounded-pill">100%</span>
 							</li>
 						</ul>
 					   </div>
@@ -208,6 +208,7 @@
 							   <th>Employeer</th>
 							   <th>Amount</th>
 							   <th>Due Date</th>
+							   <th>Borrwed Date</th>
 							   <th>Status</th>
 							 </tr>
 							 </thead>
@@ -225,6 +226,7 @@
 									<td>{{ $transaction->employee->company->company_name }}</td>
 									<td>KES {{ $transaction->amount }}</td>
 									<td>{{ $transaction->payroll_date }}</td>
+									<td>{{ $transaction->created_at }}</td>
 									<td>
 									@if ($transaction->status == 0)
 													<span class="badge bg-warning">Pending</span>
