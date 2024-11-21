@@ -38,14 +38,14 @@ class HomeController extends Controller
     $last12Months = Carbon::now()->subMonths(12);
             // Get the Payments data (status 2) for the last 12 months
     $paymentsv1 = Transactions::selectRaw('sum(amount) as total_amount, MONTH(created_at) as month')
-    ->where('status', 2)
+    ->where('status', 4)
     ->whereBetween('created_at', [$last12Months, $currentMonth])
     ->groupBy('month')
     ->pluck('total_amount', 'month');
 
 // Get the Disbursement data (status 4) for the last 12 months
 $disbursementsv1 = Transactions::selectRaw('sum(amount) as total_amount, MONTH(created_at) as month')
-    ->where('status', 4)
+    ->where('status', 2)
     ->whereBetween('created_at', [$last12Months, $currentMonth])
     ->groupBy('month')
     ->pluck('total_amount', 'month');
