@@ -9,16 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
-class Loanrequest extends Mailable
+class onboarding extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $name;
+    public $employer_name;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($name, $employer_name)
     {
-        //
+        $this->name = $name;
+        $this->employer_name = $employer_name;
     }
 
     /**
@@ -28,7 +30,7 @@ class Loanrequest extends Mailable
     {
         return new Envelope(
             from: new Address("loan@qloudpointsolutions.com", "Qloud Point Solutions Ltd"),
-            subject: 'Loan Request - Staff is requesting for loan.'
+            subject: 'New Client - New Onboarding.'
         );
     }
 
@@ -38,7 +40,11 @@ class Loanrequest extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.loanrequest',
+            view: 'emails.onboarding',
+            with: [
+                'name' => $this->name,
+                'employer_name' => $this->employer_name,
+            ]
         );
     }
 

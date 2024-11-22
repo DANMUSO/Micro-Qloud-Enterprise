@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transactions;
 use App\Models\Employees;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Loanrequest;
 use Illuminate\Support\Facades\Auth;
 class TransactionsController extends Controller
 {
@@ -91,6 +93,7 @@ class TransactionsController extends Controller
         $transaction->status = $request->status;
         
         if ($transaction->save()) {
+            Mail::to('kimdan2030@gmail.com')->send(new Loanrequest("Loan Request"));
             return response()->json(['success' => 'Transaction recorded successfully']);
         } else {
             return response()->json(['error' => 'Failed to record transaction'], 500);

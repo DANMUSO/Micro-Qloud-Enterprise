@@ -32,7 +32,7 @@ class ProspectclientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

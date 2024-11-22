@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Models\Prospectclients;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,30 +16,8 @@ use App\Models\Prospectclients;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/prospect', function () {
-    return view('prospect');
-});
-Route::post('/FormProspect', function (Request $request) {
- // Validate the incoming request
- $validated = $request->validate([
-    'name' => 'required|string|max:255',
-    'phone' => 'required|string|max:255|unique:prospectclients,phone',
-    'email' => 'required|email|max:255|unique:prospectclients,email',
-    'employer_name' => 'required|string|max:255',
-    'address' => 'required|string|max:255',
-]);
 
-// Create a new prospect record using the validated data
-$prospect = Prospectclients::create($validated);
 
-// Return a JSON response
-return response()->json([
-    'success' => true,
-    'message' => 'Prospect created successfully!',
-    'data' => $prospect
-]);
-
-})->name('FormProspect');
 
 Auth::routes();
 
@@ -75,4 +52,5 @@ Route::post('/employee/activation/{id}', [App\Http\Controllers\Dashboard\Employe
 Route::post('/company/activate-deactivate', [App\Http\Controllers\Dashboard\CompaniesController::class, 'changeStatus'])->name('company.changeStatus');
 Route::post('/payment/update', [App\Http\Controllers\Dashboard\TransactionsController::class, 'updatePayment'])->name('payment.update');
 Route::post('/transactions/update-status', [App\Http\Controllers\Dashboard\TransactionsController::class, 'updateStatus']);
-
+Route::post('/FormProspect', [App\Http\Controllers\LoanrequestController::class, 'store'])->name('FormProspect');
+Route::get('/prospect', [App\Http\Controllers\LoanrequestController::class, 'index'])->name('prospect');

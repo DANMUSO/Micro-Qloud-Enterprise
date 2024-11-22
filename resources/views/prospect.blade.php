@@ -40,7 +40,7 @@
                   <input id="address" type="text" class="form-control" placeholder="Address" name="address" required>
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
+                  <button id="submitButton" type="submit" class="btn btn-primary rounded submit p-3 px-5">Submit</button>
                 </div>
               </form>
             </div>
@@ -48,43 +48,66 @@
         </div>
       </div>
     </section>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('loginv1/js/jquery.min.js')}}"></script>
     <script src="{{asset('loginv1/js/popper.js')}}"></script>
     <script src="{{asset('loginv1/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('loginv1/js/main.js')}}"></script>
 
     <script>
-      $(document).ready(function () {
-        $('#ajaxLoginForm').on('submit', function (e) {
-          e.preventDefault();
-          const formData = $(this).serialize();
-          
-          $.ajax({
-            url: "{{ route('FormProspect') }}",
-            type: "POST",
-            data: formData,
-            dataType: 'json', // Expect JSON response
-            success: function (response) {
-              if(response.success) {
-                alert(response.message); // Display success message
-                // Optionally, redirect or clear form
-              
-              } else {
-                alert('Something went wrong. Please try again!');
-              }
-            },
-            error: function (xhr) {
-              const errors = xhr.responseJSON.errors;
-              let errorMessages = '';
-              for (const field in errors) {
-                errorMessages += errors[field][0] + '\n';
-              }
-              alert(errorMessages); // Display form errors
-            }
+    $(document).ready(function () {
+  $('#ajaxLoginForm').on('submit', function (e) {
+    e.preventDefault();
+    
+    const formData = $(this).serialize();
+
+    // Change the button text and disable it
+    const submitButton = $('#submitButton');
+    submitButton.prop('disabled', true).text('Processing, please wait...');
+
+    $.ajax({
+      url: "{{ route('FormProspect') }}",
+      type: "POST",
+      data: formData,
+      dataType: 'json', // Expect JSON response
+      success: function (response) {
+        // Restore the button text and enable it
+        submitButton.prop('disabled', false).text('Submit');
+
+        if (response.success) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Data submitted successfully",
+            showConfirmButton: false,
+            timer: 4500
           });
+        } else {
+          alert('Something went wrong. Please try again!');
+        }
+      },
+      error: function (xhr) {
+        // Restore the button text and enable it
+        submitButton.prop('disabled', false).text('Submit');
+
+        const errors = xhr.responseJSON.errors;
+        let errorMessages = '';
+        for (const field in errors) {
+          errorMessages += errors[field][0] + '\n';
+        }
+    // Use SweetAlert for displaying errors
+    Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Validation Error",
+          text: errorMessages,
+          showConfirmButton: true
         });
-      });
+      }
+    });
+  });
+});
+
     </script>
   </body>
 </html>
