@@ -146,7 +146,7 @@
 
 				<div class="row">
                   
-				   <div class="col-6 col-lg-6 d-flex">
+				   <div class="col-12 col-lg-6 d-flex">
                       <div class="card radius-10 w-100">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
