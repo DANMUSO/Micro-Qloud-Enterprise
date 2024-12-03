@@ -59,3 +59,4 @@ Route::post('/payment/update', [App\Http\Controllers\Dashboard\TransactionsContr
 Route::post('/transactions/update-status', [App\Http\Controllers\Dashboard\TransactionsController::class, 'updateStatus']);
 Route::post('/FormProspect', [App\Http\Controllers\LoanrequestController::class, 'store'])->name('FormProspect');
 Route::get('/prospect', [App\Http\Controllers\LoanrequestController::class, 'index'])->name('prospect');
+Route::post('/update-payroll-date', [App\Http\Controllers\LoanrequestController::class, 'updatePayrollDate'])->name('update-payroll-date');

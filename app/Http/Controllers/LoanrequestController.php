@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Prospectclients;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\onboarding;
+use App\Models\Companies;
+use Carbon\Carbon;
 class LoanrequestController extends Controller
 {
     /**
@@ -14,6 +16,28 @@ class LoanrequestController extends Controller
     public function index()
     {
         return view('prospect');
+    }
+    public function updatePayrollDate()
+    {
+        
+        $currentYearMonth = Carbon::now()->format('Y-m'); // Current year and month
+        $companies = Companies::all();
+
+        foreach ($companies as $company) {
+            $payrollDate = Carbon::parse($company->payroll_date);
+            $currentDate = Carbon::now();
+            $dateDifference = $currentDate->diffInDays($payrollDate);
+
+            if ($dateDifference > 3 || $dateDifference < -3) {
+                // Update payroll_date with current year and month, preserving the day
+                $newPayrollDate = Carbon::createFromFormat('Y-m-d', $currentYearMonth . '-' . $payrollDate->format('d'));
+                $company->update(['payroll_date' => $newPayrollDate]);
+            }
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Payroll dates updated with current year and month.']);
+    
+
     }
 
     /**

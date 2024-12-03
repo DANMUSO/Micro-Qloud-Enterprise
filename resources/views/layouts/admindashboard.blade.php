@@ -363,6 +363,31 @@
 	<script src="{{asset('vertical/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
+    <script>
+        setInterval(function() {
+    $.ajax({
+        url: '/update-payroll-date',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}' // CSRF token for Laravel
+        },
+        success: function(response) {
+            if (response.status === 'disabled') {
+                $('.payroll-button')
+                    .addClass('btn-secondary')
+                    .prop('disabled', true)
+                    .text(response.message);
+            } else if (response.status === 'success') {
+                $('.payroll-button')
+                    .removeClass('btn-secondary')
+                    .prop('disabled', false)
+                    .text('Apply Now');
+            }
+        }
+    });
+}, 1000); // Check every minute
+
+    </script>
 	<script>
 		function payLoan(loanId, status) {
     const swalWithBootstrapButtons = Swal.mixin({

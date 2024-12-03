@@ -66,8 +66,8 @@
                             $dateDifference = $currentDate->diffInDays($payrollDate);
                         @endphp
 
-                        @if ($dateDifference <= 5 && $dateDifference >= -5)
-                        <button  class="btn btn-secondary" disabled>You cannot apply, as it is within 5 days before or after the payroll date.</button>
+                        @if ($dateDifference <= 3 && $dateDifference >= -3)
+                        <button  class="btn btn-secondary" disabled>You cannot apply, as it is within 3 days before or after the payroll date.</button>
                         
                         @else
                         @if (session()->get('transaction.status', '5') == 0 || session()->get('transaction.status', '5') == 1)
