@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+if (env('APP_ENV') === 'production') {
 
+    Artisan::call('optimize:clear');
+    Artisan::call('cache:clear');
+    \URL::forceScheme('https');
+}
 /*
 |--------------------------------------------------------------------------
 | Web Routes
