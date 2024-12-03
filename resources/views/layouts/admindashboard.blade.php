@@ -385,7 +385,7 @@
             }
         }
     });
-}, 1000); // Check every minute
+}, 3600000); // Check every minute
 
     </script>
 	<script>
