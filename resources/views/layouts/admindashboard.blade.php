@@ -34,7 +34,7 @@
 	<link href="{{asset('vertical/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
 
 
-	<title>Micro-Qloud Ltd</title>
+	<title>Micro-Qloud Enterprise Ltd</title>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
 					<img src="{{asset('vertical/assets/images/logo3.png')}}" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
-					<h4 class="logo-text">Micro-Qloud Ltd</h4>
+					<h4 class="logo-text">Micro-Qloud Enterprise Ltd</h4>
 				</div>
 			 </div>
 			<!--navigation-->
@@ -294,7 +294,7 @@
 		  <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2024. All right reserved. <b>Qloud Point Solutions - Micro-Qloud Ltd</b></p>
+			<p class="mb-0">Copyright © 2024. All right reserved. <b>Qloud Point Solutions - Micro-Qloud Enterprise Ltd</b></p>
 		</footer>
 	</div>
 	<!--end wrapper-->
