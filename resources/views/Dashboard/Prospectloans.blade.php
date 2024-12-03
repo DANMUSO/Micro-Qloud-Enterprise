@@ -21,7 +21,7 @@
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 								<thead>
 									<tr>
-									<td>#IDn</td>
+									<td>#ID</td>
 										<td>Name</td>
 										<td>Phone</td>
 										<td>Email</td>
