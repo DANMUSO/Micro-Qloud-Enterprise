@@ -55,7 +55,7 @@
         <p><strong>Employer:</strong> {{ $employer_name }}</p>
         <p>Verify DETAILS and onboard staff.</p>
         <br>
-        <a href="http://3.235.0.52:8000/login">Log in to Onboard</a>
+        <a href="https://micro-qloudenterprise.com/login">Log in to Onboard</a>
     </div>
 </body>
 </html>

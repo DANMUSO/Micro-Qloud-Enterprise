@@ -56,7 +56,7 @@
         <p><strong>Password:</strong> {{ $password }}</p>
         <p>Please log in to access advance loan options and other services.</p>
         <br>
-        <a href="http://3.235.0.52:8000/login">Log in to Get Advance Loan</a>
+        <a href="https://micro-qloudenterprise.com/login">Log in to Get Advance Loan</a>
     </div>
 </body>
 </html>
