@@ -69,7 +69,7 @@
 										<td>{{$loanrequest->employee['name']}}</td>
 										<td>{{$loanrequest->employee['phone_no']}}</td>
 										<td>{{$loanrequest->amount}}</td>
-										<td>{{$loanrequest->payroll_date}}</td>
+										<td>{{$loanrequest->employee->company['payroll_date']}}</td>
 										
 										<td>{{$loanrequest->created_at}}</td>
 										<td>{{$loanrequest->employee->company['company_name']}}</td>
