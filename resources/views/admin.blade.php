@@ -224,7 +224,7 @@
 										</div>
 									</td>
 									<td>{{ $transaction->employee->company->company_name }}</td>
-									<td>KES {{ $transaction->amount }}</td>
+									<td>KES {{ number_format($transaction->amount, 2) }}</td>
 									<td>{{ $transaction->employee->company['payroll_date'] }}</td>
 									<td>{{ $transaction->created_at }}</td>
 									<td>

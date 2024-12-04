@@ -25,7 +25,7 @@
 									@endforeach
 								<h5 class="mb-0"> 
 
-								<p> <button class="btn btn-primary">KES {{ $transactions->sum('amount') }}</button>
+								<p> <button class="btn btn-primary">KES {{ number_format($transactions->sum('amount'),2) }}</button>
 									 </p>
 								</h5>
 								<small class="mb-0">Amount Disbursed <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
@@ -34,7 +34,7 @@
 							<div class="col">
 							  <div class="p-3">
 								<h5 class="mb-0">
-								<button class="btn btn-primary">KES {{ $transactions->sum('amount')*0.3 }}</button>
+								<button class="btn btn-primary">KES {{ number_format($transactions->sum('amount')*0.3,2) }}</button>
 								 </h5>
 								<small class="mb-0">Estimated Profit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
 							  </div>
@@ -42,7 +42,7 @@
 							<div class="col">
 							  <div class="p-3">
 								<h5 class="mb-0">
-								<button class="btn btn-primary">KES {{ $transactions->sum('amount') + $transactions->sum('amount')*0.3 }} </button>
+								<button class="btn btn-primary">KES {{ number_format($transactions->sum('amount') + $transactions->sum('amount')*0.3 ,2)}} </button>
 								</h5>
 								<small class="mb-0">Total Amount<span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
 							  </div>
@@ -69,7 +69,7 @@
 										<td>{{$loop->iteration}}</td>
 										<td>{{$loanrequest->employee['name']}}</td>
 										<td>{{$loanrequest->employee['phone_no']}}</td>
-										<td>{{$loanrequest->amount}}</td>
+										<td>{{number_format($loanrequest->amount,2)}}</td>
 										<td>{{$loanrequest->employee->company['payroll_date']}}</td>
 										
 										<td>{{$loanrequest->created_at}}</td>

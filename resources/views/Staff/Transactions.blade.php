@@ -31,7 +31,7 @@
 								@foreach ($transactions as $transaction)
 									<tr>
 										<td>{{ $loop->iteration }}</td>
-										<td>KES {{ $transaction->amount +  $transaction->amount *0.3 }}</td>
+										<td>KES {{ number_format($transaction->amount +  $transaction->amount *0.3,2) }}</td>
 										<td> <!--status 0 pending, 1 proceed, 2 paid-->
 												@if ($transaction->status == 0)
 													<span class="badge bg-warning">Pending</span>

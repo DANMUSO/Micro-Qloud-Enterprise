@@ -19,13 +19,13 @@
                 <h5 class="card-title">Loan Summary</h5>
                 <hr>
                 <p class="card-text">
-                    <strong>Principal Amount:</strong> KES {{ Session::get('employee')['amount'] }}
+                    <strong>Principal Amount:</strong> KES {{ number_format(Session::get('employee')['amount'],2) }}
                 </p>
                 <p class="card-text">
-                    <strong>Interest Amount:</strong> KES {{ Session::get('employee')['amount'] * 0.3 }}
+                    <strong>Interest Amount:</strong> KES {{ number_format(Session::get('employee')['amount'] * 0.3 ,2) }}
                 </p>
                 <p class="card-text">
-                    <strong>Total Amount:</strong> KES {{ Session::get('employee')['amount'] + (Session::get('employee')['amount'] * 0.3) }}
+                    <strong>Total Amount:</strong> KES {{ number_format(Session::get('employee')['amount'] + (Session::get('employee')['amount'] * 0.3),2) }}
                 </p>
             </div>
         </div><!-- Example loan amount -->
@@ -39,7 +39,7 @@
                     <strong>Till No:</strong> 8656636
                 </p>
                 <p class="card-text">
-                    <strong>Total Amount:</strong>  KES {{ Session::get('employee')['amount'] + (Session::get('employee')['amount'] * 0.3) }}
+                    <strong>Total Amount:</strong>  KES {{ number_format(Session::get('employee')['amount'] + (Session::get('employee')['amount'] * 0.3),2) }}
                 </p>
                 <p class="card-text">
                     <strong>WhatsApp M-PESA Message  to:</strong> 0703894372
@@ -106,9 +106,9 @@
                     <div class="me-3">
                         <p class="mb-0 text-secondary"><b>Loan Duration & Payable Amount</b></p>
                         <h5 class="my-1 text-success">Borrowed amount is payable on the next payroll date.</h5>
-                        <p class="mb-0 font-13">Loan Amount: KES {{ Session::get('employee')['amount'] }}</p>
-                        <p class="mb-0 font-13">Interest: KES {{ Session::get('employee')['amount'] *0.3 }} </p>
-                        <p class="mb-0 font-13"><strong>Total Payable: KES {{ Session::get('employee')['amount'] + Session::get('employee')['amount'] *0.3 }} </strong></p>
+                        <p class="mb-0 font-13">Loan Amount: KES {{ number_format(Session::get('employee')['amount'],2) }}</p>
+                        <p class="mb-0 font-13">Interest: KES {{ number_format(Session::get('employee')['amount'] *0.3 ,2) }} </p>
+                        <p class="mb-0 font-13"><strong>Total Payable: KES {{ number_format(Session::get('employee')['amount'] + Session::get('employee')['amount'] *0.3 ,2)}} </strong></p>
                     </div>
                 </div>
             </div>
