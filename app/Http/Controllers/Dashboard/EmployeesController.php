@@ -43,16 +43,16 @@ class EmployeesController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email',
-            'phone_no' => 'required|string|max:15',
+            'phone_no' => 'required|string|unique:employees,phone_no',
             'amount' => 'required|numeric',
             'company_id' => 'required|exists:companies,id', // Ensure company_id exists in companies table
             'status' => 'nullable|integer|in:0,1', // Optional status field
         ]);
-// Generate a random password (you can change this logic as needed)
-$plainPassword = Str::random(12); // You can generate a random string here
+        // Generate a random password (you can change this logic as needed)
+        $plainPassword = Str::random(12); // You can generate a random string here
 
-// Hash the password using bcrypt
-$hashedPassword = bcrypt($plainPassword);
+        // Hash the password using bcrypt
+        $hashedPassword = bcrypt($plainPassword);
         // Create a new employee
         $employee = Employees::create([
             'name' => $request->name,

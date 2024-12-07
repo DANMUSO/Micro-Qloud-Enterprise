@@ -8,170 +8,153 @@
                     
                       <div class="card radius-10 w-100">
 						<div class="card-header">
+						<div class="row">
+                   <div class="col-md-2 col-lg-10 d-flex">
+                    
 							<div class="d-flex align-items-center">
 								<div>
-									<h6 class="mb-0">Payment & Disbursement Overview</h6>
+									<h6 class="mb-0">Clients</h6>
 								</div>
 							</div>
+                    </div>
+                    <div class="col-md-2  col-lg-2 d-flex">
+							<div class="d-flex align-items-center">
+								<div>
+																	<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+								Add Client
+								</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Add Client</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+									<div id="feedbackMessage" class="alert d-none" role="alert"></div>
+										<!-- Company Details Form -->
+										<form id="clientDetailsForm">
+										@csrf
+										<div class="form-group">
+											<label for="fullName">Full Name</label>
+											<input type="text" class="form-control" id="fullName" name="full_name" required>
+										</div>
+										<div class="form-group">
+											<label for="email">Email</label>
+											<input type="email" class="form-control" id="email" name="email" required>
+										</div>
+										<div class="form-group">
+											<label for="phone">Phone Number</label>
+											<input type="number" class="form-control" id="phone" name="phone" required>
+										</div>
+										<div class="form-group">
+											<label for="location">Location Address</label>
+											<input type="text" class="form-control" id="location" name="location" required>
+										</div>
+										<div class="form-group">
+											<label for="shopName">Shop Name</label>
+											<input type="text" class="form-control" id="shopName" name="shop_name" required>
+										</div>
+										<div class="form-group">
+											<label for="photo">Photo</label>
+											<input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+										</div>
+										<div class="form-group">
+											<label for="permit">Permit</label>
+											<input type="file" class="form-control" id="permit" name="permit" accept="image/*,application/pdf" required>
+										</div>
+										<div class="form-group">
+											<label for="idPhotos">ID Photos</label>
+											<input type="file" class="form-control" id="idPhotos" name="id_photos[]" accept="image/*" multiple required>
+										</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+
+									</div>
+									
+									</div>
+								</div>
+								</div>
+								</div>
+							</div>
+                    </div>
+                    </div>
 						</div>
                         
 						  <div class="card-body">
                             
-						  <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">KES 3,050,000</h5>
-								<small class="mb-0">Overall Payment <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-							  </div>
-							</div>
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">KES 4,500,000</h5>
-								<small class="mb-0">Overall Disbursement <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-							  </div>
-							</div>
-							<div class="col">
-							  <div class="p-3">
-								<h5 class="mb-0">KES 2,050,000</h5>
-								<small class="mb-0">Income<span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-							  </div>
-							</div>
-						  </div>
                           <div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>Position</th>
-										<th>Office</th>
-										<th>Age</th>
-										<th>Start date</th>
-										<th>Salary</th>
+									    <th>#ID</th>
+										<th>Full Name</th>
+										<th>Email</th>
+										<th>Phone Number</th>
+										<th>Shop Name</th>
+										<th>Location Address</th>
+										<th>Photo</th>
+										<th>Business Permit</th>
+										<th>ID Photos</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
+									@foreach($clients as $client)
 									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
+										<td>{{$client->id}}
+										<br>
+										<a href="{{ route('client.loans', $client->id) }}" class="btn btn-primary btn-sm">Loans</a>
+										</td>
+										<td>{{$client->full_name}}</td>
+										<td>{{$client->email}}</td>
+										<td>{{$client->phone}}</td>
+										<td>{{$client->shop_name}}</td>
+										<td>{{$client->location}}</td>
+										<td><img src="{{ asset('storage/photos/' . $client->photo) }}" alt="Photo" class="hover-effect" width="50"></td>
+										<td><img src="{{ asset('storage/permits/'.$client->permit) }}" alt="Permit" class="hover-effect" width="50"></td>
+										<td>
+											@foreach (json_decode($client->id_photos) as $photo)
+												<img src="{{ asset('storage/id_photos/' . $photo) }}" alt="ID Photo" class="hover-effect" width="50">
+											@endforeach
+										</td>
+										<td>
+										@if($client->status == 1)
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                    
+                                    <button type="button" class="btn btn-outline-danger" onclick="clientActivation({{ $client->id }}, 'deactivate')">Deactivate</button>
+                                    </div>
+                                      @else
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-success" onclick="clientActivation({{ $client->id }}, 'activate')">Activate</button>
+                                    
+                                    </div>
+                                      @endif
+                                        </td>
 									</tr>
-									<tr>
-										<td>Garrett Winters</td>
-										<td>Accountant</td>
-										<td>Tokyo</td>
-										<td>63</td>
-										<td>2011/07/25</td>
-										<td>$170,750</td>
-									</tr>
-									<tr>
-										<td>Ashton Cox</td>
-										<td>Junior Technical Author</td>
-										<td>San Francisco</td>
-										<td>66</td>
-										<td>2009/01/12</td>
-										<td>$86,000</td>
-									</tr>
-									<tr>
-										<td>Cedric Kelly</td>
-										<td>Senior Javascript Developer</td>
-										<td>Edinburgh</td>
-										<td>22</td>
-										<td>2012/03/29</td>
-										<td>$433,060</td>
-									</tr>
-									<tr>
-										<td>Airi Satou</td>
-										<td>Accountant</td>
-										<td>Tokyo</td>
-										<td>33</td>
-										<td>2008/11/28</td>
-										<td>$162,700</td>
-									</tr>
-									<tr>
-										<td>Brielle Williamson</td>
-										<td>Integration Specialist</td>
-										<td>New York</td>
-										<td>61</td>
-										<td>2012/12/02</td>
-										<td>$372,000</td>
-									</tr>
-									<tr>
-										<td>Herrod Chandler</td>
-										<td>Sales Assistant</td>
-										<td>San Francisco</td>
-										<td>59</td>
-										<td>2012/08/06</td>
-										<td>$137,500</td>
-									</tr>
-									<tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
-                                    <tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
-                                    <tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
-                                    <tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
-                                    <tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
-                                    <tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
-                                    <tr>
-										<td>Rhona Davidson</td>
-										<td>Integration Specialist</td>
-										<td>Tokyo</td>
-										<td>55</td>
-										<td>2010/10/14</td>
-										<td>$327,900</td>
-									</tr>
+									@endforeach
+									
+									
 									
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>Name</th>
-										<th>Position</th>
-										<th>Office</th>
-										<th>Age</th>
-										<th>Start date</th>
-										<th>Salary</th>
+										
+									<th>#ID</th>
+										<th>Full Name</th>
+										<th>Email</th>
+										<th>Phone Number</th>
+										<th>Shop Name</th>
+										<th>Location Address</th>
+										<th>Photo</th>
+										<th>Business Permit</th>
+										<th>ID Photos</th>
+										<th>Action</th>
 									</tr>
 								</tfoot>
 							</table>

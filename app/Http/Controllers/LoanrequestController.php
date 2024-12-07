@@ -72,7 +72,7 @@ class LoanrequestController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Prospect created successfully!',
-            'data' => $prospect
+            
         ]);
     }
 

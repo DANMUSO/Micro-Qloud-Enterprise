@@ -35,6 +35,17 @@
 
 
 	<title>Micro-Qloud Enterprise Ltd</title>
+    <style>
+        img.hover-effect {
+        transition: transform 0.3s ease; /* Smooth transition */
+        width: 50px; /* Initial width */
+        }
+
+        img.hover-effect:hover {
+            transform: scale(10.5); /* Scale the image on hover */
+            cursor: pointer; /* Change cursor to indicate interactivity */
+        }
+        </style>
 </head>
 
 <body>
@@ -364,6 +375,56 @@
 	<!--app JS-->
 	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
     <script>
+    $(document).ready(function () {
+        $('#clientDetailsForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            let formData = new FormData(this); // Create FormData object
+
+            $.ajax({
+                url: '/submit-client-details', // Replace with your submission URL
+                type: 'POST',
+                data: formData,
+                contentType: false, // Required for file uploads
+                processData: false, // Required for file uploads
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                },
+                success: function (response) {
+                
+                    if (response.success) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Data submitted successfully",
+                        showConfirmButton: false,
+                        timer: 4500
+                    });
+                    } else {
+                    alert('Something went wrong. Please try again!');
+                    }
+                    },
+                    error: function (xhr) {
+
+                    const errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (const field in errors) {
+                    errorMessages += errors[field][0] + '\n';
+                    }
+                    // Use SweetAlert for displaying errors
+                    Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Validation Error",
+                    text: errorMessages,
+                    showConfirmButton: true
+                    });
+                    }
+            });
+        });
+    });
+</script>
+    <script>
         setInterval(function() {
     $.ajax({
         url: '/update-payroll-date',
@@ -626,6 +687,67 @@ function changeActivation(id, action) {
         }
     });
 }
+//Clients Activation & Deactivation
+function clientActivation(id, action) {
+    // Configure action text and endpoint based on the action
+    let actionText = action === 'activate' ? 'activate' : 'deactivate';
+    let confirmButtonColor = action === 'activate' ? 'btn btn-success' : 'btn btn-danger';
+
+    // Configure SweetAlert with Bootstrap-styled buttons
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: confirmButtonColor,
+            cancelButton: "btn btn-secondary"
+        },
+        buttonsStyling: false
+    });
+
+    // Show confirmation dialog
+    swalWithBootstrapButtons.fire({
+        title: `Are you sure you want to ${actionText} this client?`,
+        text: "This action can be reverted later.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: `Yes, ${actionText} it!`,
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform AJAX request if confirmed
+            $.ajax({
+                url: `/client/activation/${id}`,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    action: action
+                },
+                success: function(response) {
+                    if (response.success) {
+                        swalWithBootstrapButtons.fire({
+                            title: actionText.charAt(0).toUpperCase() + actionText.slice(1) + "d!",
+                            text: `The client has been ${actionText}d.`,
+                            icon: "success"
+                        }).then(() => {
+                            location.reload(); // Reload page to update button state
+                        });
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function() {
+                    toastr.error('An error occurred. Please try again.');
+                }
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Cancelled action message
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: `The client was not ${actionText}d.`,
+                icon: "error"
+            });
+        }
+    });
+}
 //Company Activation $ Deactivation
 function CompanyActivation(companyId, action) {
     // Custom SweetAlert with Bootstrap buttons
@@ -764,18 +886,34 @@ $(document).ready(function() {
             method: 'POST',
             data: $(this).serialize(), // Serialize form data
             success: function(response) {
-                $('#responseMessage')
-                    .show()
-                    .addClass('alert-success')
-                    .text(response.success);
-                $('#employeeForm')[0].reset(); // Reset form fields
-            },
-            error: function(xhr, status, error) {
-                $('#responseMessage')
-                    .show()
-                    .addClass('alert-danger')
-                    .text('There was an error submitting the form.');
-            }
+                if (response.success) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Data submitted successfully",
+                        showConfirmButton: false,
+                        timer: 4500
+                    });
+                    } else {
+                    alert('Something went wrong. Please try again!');
+                    }
+                    },
+                    error: function (xhr) {
+
+                    const errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (const field in errors) {
+                    errorMessages += errors[field][0] + '\n';
+                    }
+                    // Use SweetAlert for displaying errors
+                    Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Validation Error",
+                    text: errorMessages,
+                    showConfirmButton: true
+                    });
+                    }
         });
     });
 });
