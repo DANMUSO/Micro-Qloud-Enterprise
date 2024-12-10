@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer('status');
             $table->timestamps();
 
-            $table->foreign('loan_id')->references('id')->on('loans')->onDelete('cascade'); // Foreign key constraint
-        
         });
     }
 
