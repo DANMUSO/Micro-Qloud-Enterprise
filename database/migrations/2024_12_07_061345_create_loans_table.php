@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
+            $table->integer('client_id');
             $table->decimal('amount', 10, 2); // The loan amount
             $table->decimal('penalty_rate', 5, 2)->default(0.05); // Penalty rate (e.g., 5%)
             $table->decimal('total_due', 10, 2);
