@@ -6,37 +6,75 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Loan;
 use App\Models\Onboardedclients;
-use Carbon\Carbon;
+use Carbon\Carbon; 
+use App\Models\PaymentSchedule;
 class LoanController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    public function createLoan(Request $request, $clientId)
+    public function createLoan(Request $request)
     {
-        
-        // Validate request data
-        $validated = $request->validate([
-            'loan_amount' => 'required|numeric',
-            'penalty_rate' => 'required|numeric',
-            'payment_schedule_weeks' => 'required|integer',
+       // Validate request data
+    $validated = $request->validate([
+        'client_id' => 'required|integer',
+        'loan_amount' => 'required|numeric',
+        'loan_duration' => 'required|integer|in:3,4,5', // Restrict to 3, 4, or 5 weeks
+    ]);
+    // Calculate constants
+    $principal = $validated['loan_amount'];
+    $weeks = $validated['loan_duration'];
+    $weeklyInterest = $principal * 0.0625; // 6.25% interest
+    $weeklyInstallment = $principal / $weeks;
+
+    // Weekly payment (interest + installment)
+    $weeklyPayment = $weeklyInterest + $weeklyInstallment;
+
+    // Penalty for late payment
+    $penalty = $weeklyPayment * 0.10; // 10% of weekly payment
+
+    // Calculate all next payment dues
+    $currentDate = Carbon::now();
+    $paymentSchedule = [];
+    for ($i = 1; $i <= $weeks; $i++) {
+        $paymentSchedule[] = [
+            'week' => $i,
+            'amount_due' => $weeklyPayment,
+            'due_date' => $currentDate->copy()->addWeeks($i),
+        ];
+    }
+
+    // Save loan record
+    $loan = Loan::create([
+        'client_id' => $validated['client_id'],
+        'principal_amount' => $principal,
+        'weekly_interest' => $weeklyInterest,
+        'weekly_installment' => $weeklyInstallment,
+        'weekly_payment' => $weeklyPayment,
+        'penalty_rate' => 0.10, // 10%
+        'next_payment_due' => $paymentSchedule[0]['due_date'], // First payment due date
+        'total_due' => $principal + ($weeklyInterest * $weeks), // Total due without penalties
+    ]);
+
+    // Optionally save payment schedule in a separate table
+    foreach ($paymentSchedule as $payment) {
+        PaymentSchedule::create([
+            'loan_id' => $loan->id,
+            'week' => $payment['week'],
+            'amount_due' => $payment['amount_due'],
+            'due_date' => $payment['due_date'],
+            'status' => 0,
         ]);
+    }
 
-        $weeklyPayment = $validated['loan_amount'] / $validated['payment_schedule_weeks'];
-        $totalDue = $validated['loan_amount'] + ($weeklyPayment * $validated['payment_schedule_weeks'] * $validated['penalty_rate']);
-
-        // Create loan record
-        $loan = Loan::create([
-            'client_id' => $clientId,
-            'amount' => $validated['loan_amount'],
-            'penalty_rate' => $validated['penalty_rate'],
-            'total_due' => $totalDue,
-            'weekly_payment' => $weeklyPayment,
-            'next_payment_due' => Carbon::now()->addWeeks(1), // Next payment due in 1 week
-        ]);
-
-        return response()->json(['message' => 'Loan created successfully', 'loan' => $loan]);
+    // Return response
+    return response()->json([
+        'message' => 'Loan created successfully',
+        'loan' => $loan,
+        'payment_schedule' => $paymentSchedule,
+    ]); 
+    
     }
 
     public function makePayment(Request $request, $loanId)

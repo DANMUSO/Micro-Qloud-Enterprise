@@ -21,7 +21,7 @@ class OnboardedclientsController extends Controller
      */
     public function index()
     {
-        $clients = Onboardedclients::all();
+        $clients = Onboardedclients::get();
         return view('Dashboard.Onboardedclients', compact('clients'));
     }
 
@@ -104,7 +104,7 @@ class OnboardedclientsController extends Controller
      */
     public function showClient(string $id)
     {
-        $client = Onboardedclients::with('loans')->find($id);
+        $client = Onboardedclients::with('loans.loanschedule')->find($id);
        
        
         return view('Dashboard.Client',  compact('client'));

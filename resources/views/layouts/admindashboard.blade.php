@@ -10,6 +10,7 @@
 	<!--favicon-->
 	<link rel="icon" href="{{asset('vertical/assets/images/logo3.png')}}" type="image/png"/>
 	<!--plugins-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link href="{{asset('vertical/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
 	<link href="{{asset('vertical/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 	<link href="{{asset('vertical/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
@@ -374,6 +375,62 @@
 	<script src="{{asset('vertical/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+             // Add CSRF token to all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('#loanForm').on('submit', function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        // Disable the submit button to prevent multiple submissions
+        $('button[type="submit"]').prop('disabled', true);
+        
+        // Prepare the data to send
+        let formData = {
+            client_id: $('#client_id').val(),
+            loan_amount: $('#loan_amount').val(),
+            loan_duration: $('#loanDuration').val(),
+        };
+
+        // Send the AJAX request
+        $.ajax({
+            url: '/loanclient/create',  // Adjust to your actual route
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            
+            success: function(response) {
+                // Enable submit button
+                $('button[type="submit"]').prop('disabled', false);
+
+                // Show success message
+                $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
+
+                // Optionally reset the form
+                $('#loanForm')[0].reset();
+            },
+            error: function(xhr) {
+                // Enable submit button
+                $('button[type="submit"]').prop('disabled', false);
+
+                // Handle validation or server error
+                let errors = xhr.responseJSON.errors;
+                let errorMessage = '<div class="alert alert-danger"><ul>';
+                $.each(errors, function(key, value) {
+                    errorMessage += '<li>' + value[0] + '</li>';
+                });
+                errorMessage += '</ul></div>';
+                $('#responseMessage').html(errorMessage);
+            }
+        });
+    });
+});
+
+        </script>
     <script>
     $(document).ready(function () {
         $('#clientDetailsForm').on('submit', function (e) {

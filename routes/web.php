@@ -63,3 +63,4 @@ Route::post('/update-payroll-date', [App\Http\Controllers\LoanrequestController:
 Route::post('/submit-client-details', [App\Http\Controllers\Dashboard\OnboardedclientsController::class, 'store'])->name('submit-client-details');
 Route::post('/client/activation/{id}', [App\Http\Controllers\Dashboard\OnboardedclientsController::class, 'update']);
 Route::get('/client/{id}/loans', [App\Http\Controllers\Dashboard\OnboardedclientsController::class, 'showClient'])->name('client.loans');
+Route::post('/loanclient/create', [App\Http\Controllers\Dashboard\LoanController::class, 'createLoan']);

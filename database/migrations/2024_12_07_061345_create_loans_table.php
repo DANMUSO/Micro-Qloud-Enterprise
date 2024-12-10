@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id');
-            $table->decimal('amount', 10, 2); // The loan amount
-            $table->decimal('penalty_rate', 5, 2)->default(0.05); // Penalty rate (e.g., 5%)
-            $table->decimal('total_due', 10, 2);
-            $table->integer('payment_schedule_weeks')->default(3); // Number of weeks for the payment schedule
-            $table->decimal('weekly_payment', 10, 2);
-            $table->decimal('penalty_total', 10, 2)->default(0); // Total penalty for late payments
-            $table->timestamp('next_payment_due')->nullable();
-            $table->enum('status', ['pending', 'approved', 'paid'])->default('pending');
+            $table->unsignedBigInteger('client_id'); // assuming client_id refers to the clients table
+            $table->decimal('principal_amount', 10, 2); // The total loan amount
+            $table->decimal('weekly_interest', 10, 2); // Weekly interest amount (6.25%)
+            $table->decimal('weekly_installment', 10, 2); // Weekly installment (principal / weeks)
+            $table->decimal('weekly_payment', 10, 2); // Total weekly payment (installment + interest)
+            $table->decimal('penalty_rate', 5, 2); // Penalty rate (10%)
+            $table->date('next_payment_due'); // The first payment due date
+            $table->decimal('total_due', 10, 2); // Total due without penalties
             $table->timestamps();
+            
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade'); // assuming there's a clients table
+       
     
         
         });

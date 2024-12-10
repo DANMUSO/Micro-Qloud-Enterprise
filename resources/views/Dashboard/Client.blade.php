@@ -41,20 +41,72 @@
                             <th>Loan Amount</th>
                             <th>Weekly Payment</th>
                             <th>Total Due</th>
-                            <th>Status</th>
+                            <th>Next Payment Due</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($client->loans as $loan)
                             <tr>
-                                <td>KES {{ number_format($loan->amount, 2) }}</td>
+                                <td>KES {{ number_format($loan->principal_amount, 2) }}</td>
                                 <td>KES {{ number_format($loan->weekly_payment, 2) }}</td>
                                 <td>KES {{ number_format($loan->total_due, 2) }}</td>
-                                <td>{{ $loan->status }}</td>
+                              
+                                <td>{{ \Carbon\Carbon::parse($loan->next_payment_due)->format('Y-m-d') }}</td>
+                                <td><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#scheduleModal{{ $loan->id }}">View Schedule</button></td>
                             </tr>
+
+                            <!-- Modal for Loan Payment Schedule -->
+                            <div class="modal fade" id="scheduleModal{{ $loan->id }}" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="scheduleModalLabel">Payment Schedule for Loan: KES {{ number_format($loan->principal_amount, 2) }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <div class="row">
+                                            <!-- Loop through each payment schedule and display it in a card -->
+                                            @foreach($loan->loanschedule as $schedule)
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Week {{ $schedule->week }}</h5>
+                                                            <p class="card-text"><strong>Amount Due:</strong> KES {{ number_format($schedule->amount_due, 2) }}</p>
+                                                            <p class="card-text"><strong>Due Date:</strong> {{ \Carbon\Carbon::parse($schedule->due_date)->format('Y-m-d') }}</p>
+                                                            
+                                                            <!-- Displaying the status -->
+                                                            <p class="card-text">
+                                                                <strong>Status:</strong> 
+                                                                @if($schedule->status == 0)
+                                                                    <span class="text-warning">Processed</span>
+                                                                @elseif($schedule->status == 1)
+                                                                    <span class="text-success">Paid</span>
+                                                                @elseif($schedule->status == 2)
+                                                                    <span class="text-danger">Overdue</span>
+                                                                @else
+                                                                    Unknown
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
+
                 </div>
             </div>
         </div>
@@ -69,21 +121,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="loanForm">
-                        <div class="mb-3">
-                            <label for="loanAmount" class="form-label">Loan Amount</label>
-                            <input type="number" class="form-control" id="loanAmount" name="loan_amount" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="loanTerms" class="form-label">Loan Terms</label>
-                            <textarea class="form-control" id="loanTerms" name="loan_terms" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="loanDuration" class="form-label">Loan Duration (Months)</label>
-                            <input type="number" class="form-control" id="loanDuration" name="loan_duration" required>
-                        </div>
-                        <button type="submit" class="btn btn-success">Grant Loan</button>
-                    </form>
+                <form id="loanForm">
+                @csrf
+                    <div class="mb-3">
+                        <label for="client_id" class="form-label">Client ID</label>
+                        <input type="number" class="form-control" id="client_id" name="client_id" value="{{ $client->id }}" required readonly>
+                    </div>
+                    <div class="mb-3">  
+                        <label for="loan_amount" class="form-label">Loan Amount</label>
+                        <input type="number" class="form-control" id="loan_amount" name="loan_amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loanDuration" class="form-label">Loan Duration (Weeks)</label>
+                        <input type="number" class="form-control" id="loanDuration" name="loan_duration" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Grant Loan</button>
+                </form>
+
+                <!-- Add a loading spinner or success message here -->
+                <div id="responseMessage"></div>
+
                 </div>
             </div>
         </div>

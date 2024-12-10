@@ -9,9 +9,14 @@ class Loan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'client_id', 'amount', 'penalty_rate', 'total_due', 
-        'payment_schedule_weeks', 'weekly_payment', 'penalty_total',
-        'next_payment_due', 'status'
+        'client_id',
+        'principal_amount',
+        'weekly_interest',
+        'weekly_installment',
+        'weekly_payment',
+        'penalty_rate',
+        'next_payment_due',
+        'total_due',
     ];
 
     protected $casts = [
@@ -30,6 +35,11 @@ class Loan extends Model
         return $dueAmount;
     }
 
+    //Loan schedule
+    public function loanschedule()
+    {
+        return $this->hasMany(PaymentSchedule::class);
+    }
     // Calculate the penalty for missed payments
     public function calculatePenalty($daysLate)
     {

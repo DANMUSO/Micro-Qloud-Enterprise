@@ -117,7 +117,20 @@
 										<td>{{$client->shop_name}}</td>
 										<td>{{$client->location}}</td>
 										<td><img src="{{ asset('storage/photos/' . $client->photo) }}" alt="Photo" class="hover-effect" width="50"></td>
-										<td><img src="{{ asset('storage/permits/'.$client->permit) }}" alt="Permit" class="hover-effect" width="50"></td>
+										<td>
+										@if (Str::endsWith($client->permit, ['.jpg', '.jpeg', '.png', '.gif']))
+											<!-- Display image -->
+											<img src="{{ asset('storage/permits/'.$client->permit) }}" alt="Permit" class="hover-effect" width="50">
+										@elseif (Str::endsWith($client->permit, ['.pdf']))
+											<!-- Provide a link or embed PDF -->
+											<a href="{{ asset('storage/permits/'.$client->permit) }}" target="_blank" class="btn btn-sm btn-primary">
+												View PDF
+											</a>
+										@else
+											<!-- Handle other file types -->
+											<span class="text-danger">Invalid file type</span>
+										@endif
+									</td>
 										<td>
 											@foreach (json_decode($client->id_photos) as $photo)
 												<img src="{{ asset('storage/id_photos/' . $photo) }}" alt="ID Photo" class="hover-effect" width="50">
