@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id'); // assuming client_id refers to the clients table
+            $table->integer('client_id'); // assuming client_id refers to the clients table
             $table->decimal('principal_amount', 10, 2); // The total loan amount
             $table->decimal('weekly_interest', 10, 2); // Weekly interest amount (6.25%)
             $table->decimal('weekly_installment', 10, 2); // Weekly installment (principal / weeks)
@@ -23,9 +23,6 @@ return new class extends Migration
             $table->decimal('total_due', 10, 2); // Total due without penalties
             $table->timestamps();
             
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade'); // assuming there's a clients table
-       
-    
         
         });
     }
