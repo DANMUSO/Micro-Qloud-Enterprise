@@ -6,16 +6,22 @@
         <!-- Profile Details Section -->
         <div class="col-12 col-lg-4">
     <div class="card">
-        <div class="card-body text-center">
-            <!-- Client Photo -->
-            <img src="{{ asset('storage/photos/'.$client->photo) }}" alt="Client Photo" class="rounded-circle mb-3" width="50%" height="120px">
-            
-            <!-- Client Full Name -->
-            <h3 class="mt-3">{{ $client->full_name }}</h3>
+      
+                 <!-- Shop Name Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <center>
+        <img src="{{ asset('storage/photos/'.$client->photo) }}" alt="Client Photo" class="rounded-circle mb-3" width="50%" height="120px">
+</center>
         </div>
     </div>
-
-    <!-- Shop Name Card -->
+               <!-- Shop Name Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <p>  <h3 class="mt-3">{{ $client->full_name }}</h3></p>
+        </div>
+    </div>
+         <!-- Shop Name Card -->
     <div class="card mt-3">
         <div class="card-body">
             <p><strong>Shop Name:</strong> {{ $client->shop_name }}</p>
@@ -55,6 +61,9 @@
         </div>
     </div>
 
+    </div>
+
+   
 </div>
 
 
