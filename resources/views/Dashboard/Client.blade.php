@@ -68,30 +68,49 @@
                                         <div class="row">
                                             <!-- Loop through each payment schedule and display it in a card -->
                                             @foreach($loan->loanschedule as $schedule)
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Week {{ $schedule->week }}</h5>
-                                                            <p class="card-text"><strong>Amount Due:</strong> KES {{ number_format($schedule->amount_due, 2) }}</p>
-                                                            <p class="card-text"><strong>Due Date:</strong> {{ \Carbon\Carbon::parse($schedule->due_date)->format('Y-m-d') }}</p>
-                                                            
-                                                            <!-- Displaying the status -->
-                                                            <p class="card-text">
-                                                                <strong>Status:</strong> 
-                                                                @if($schedule->status == 0)
-                                                                    <span class="text-warning">Processed</span>
-                                                                @elseif($schedule->status == 1)
-                                                                    <span class="text-success">Paid</span>
-                                                                @elseif($schedule->status == 2)
-                                                                    <span class="text-danger">Overdue</span>
-                                                                @else
-                                                                    Unknown
-                                                                @endif
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+    @php
+        $isActive = \Carbon\Carbon::today()->between(
+            \Carbon\Carbon::parse($schedule->due_date)->subDays(7),
+            \Carbon\Carbon::parse($schedule->due_date)
+        );
+    @endphp
+    <div class="col-md-4 mb-3">
+        <!-- Dynamically add classes to the card based on status and active schedule -->
+        <div class="card 
+            @if($isActive) bg-primary text-white 
+            @elseif($schedule->status == 0) bg-warning text-dark 
+            @elseif($schedule->status == 1) bg-success text-white 
+            @elseif($schedule->status == 2) bg-danger text-white 
+            @else bg-secondary text-white 
+            @endif">
+            <div class="card-body">
+                <h5 class="card-title">Week {{ $schedule->week }}</h5>
+                <p class="card-text"><strong>Amount Due:</strong> KES {{ number_format($schedule->amount_due, 2) }}</p>
+                <p class="card-text"><strong>Due Date:</strong> {{ \Carbon\Carbon::parse($schedule->due_date)->format('Y-m-d') }}</p>
+
+                <!-- Displaying the status -->
+                <p class="card-text">
+                    <strong>Status:</strong> 
+                    @if($schedule->status == 0)
+                        <span class="text-dark">Processed</span>
+                    @elseif($schedule->status == 1)
+                        <span class="text-white">Paid</span>
+                    @elseif($schedule->status == 2)
+                        <span class="text-white">Overdue</span>
+                    @else
+                        <span class="text-white">Unknown</span>
+                    @endif
+                </p>
+
+                <!-- Indicate active card -->
+                @if($isActive)
+                    <span class="badge bg-light text-dark">Current Schedule</span>
+                @endif
+            </div>
+        </div>
+    </div>
+@endforeach
+
                                         </div>
                                     </div>
 
