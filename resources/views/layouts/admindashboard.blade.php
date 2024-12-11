@@ -40,6 +40,7 @@
         img.hover-effect {
         transition: transform 0.3s ease; /* Smooth transition */
         width: 50px; /* Initial width */
+        z-index: 10;
         }
 
         img.hover-effect:hover {
@@ -376,61 +377,101 @@
 	<!--app JS-->
 	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
     <script>
-        $(document).ready(function() {
-             // Add CSRF token to all AJAX requests
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $('#loanForm').on('submit', function(e) {
-        e.preventDefault();  // Prevent default form submission
-
-        // Disable the submit button to prevent multiple submissions
-        $('button[type="submit"]').prop('disabled', true);
-        
-        // Prepare the data to send
-        let formData = {
-            client_id: $('#client_id').val(),
-            loan_amount: $('#loan_amount').val(),
-            loan_duration: $('#loanDuration').val(),
-        };
-
-        // Send the AJAX request
-        $.ajax({
-            url: '/loanclient/create',  // Adjust to your actual route
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            
-            success: function(response) {
-                // Enable submit button
-                $('button[type="submit"]').prop('disabled', false);
-
-                // Show success message
-                $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
-
-                // Optionally reset the form
-                $('#loanForm')[0].reset();
-            },
-            error: function(xhr) {
-                // Enable submit button
-                $('button[type="submit"]').prop('disabled', false);
-
-                // Handle validation or server error
-                let errors = xhr.responseJSON.errors;
-                let errorMessage = '<div class="alert alert-danger"><ul>';
-                $.each(errors, function(key, value) {
-                    errorMessage += '<li>' + value[0] + '</li>';
-                });
-                errorMessage += '</ul></div>';
-                $('#responseMessage').html(errorMessage);
+    $(document).ready(function() {
+        // Add CSRF token to all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    });
-});
 
-        </script>
+        // When the loan form is submitted
+        $('#loanForm').on('submit', function(e) {
+            e.preventDefault();  // Prevent default form submission
+
+            // SweetAlert confirmation before submitting the form
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: "Are you sure?",
+                text: "Do you want to submit this loan application?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, submit it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Disable the submit button to prevent multiple submissions
+                    $('button[type="submit"]').prop('disabled', true);
+
+                    // Prepare the data to send
+                    let formData = {
+                        client_id: $('#client_id').val(),
+                        loan_amount: $('#loan_amount').val(),
+                        loan_duration: $('#loanDuration').val(),
+                    };
+
+                    // Send the AJAX request
+                    $.ajax({
+                        url: '/loanclient/create',  // Adjust to your actual route
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        success: function(response) {
+                            // Enable submit button
+                            $('button[type="submit"]').prop('disabled', false);
+
+                            // Show success message in SweetAlert pop-up
+                            swalWithBootstrapButtons.fire({
+                                title: 'Success!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'Okay'
+                            });
+                            location.reload();
+                            // Optionally reset the form
+                            $('#loanForm')[0].reset();
+                        },
+                        error: function(xhr) {
+                            // Enable submit button
+                            $('button[type="submit"]').prop('disabled', false);
+
+                            // Handle validation or server error
+                            let errors = xhr.responseJSON.errors;
+                            let errorMessage = '<ul>';
+                            $.each(errors, function(key, value) {
+                                errorMessage += '<li>' + value[0] + '</li>';
+                            });
+                            errorMessage += '</ul>';
+
+                            // Show error in SweetAlert pop-up
+                            swalWithBootstrapButtons.fire({
+                                title: 'Error!',
+                                html: errorMessage,
+                                icon: 'error',
+                                confirmButtonText: 'Okay'
+                            });
+                        }
+                    });
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Your loan application is safe :)",
+                        icon: "error"
+                    });
+                }
+            });
+        });
+    });
+</script>
+
     <script>
     $(document).ready(function () {
         $('#clientDetailsForm').on('submit', function (e) {

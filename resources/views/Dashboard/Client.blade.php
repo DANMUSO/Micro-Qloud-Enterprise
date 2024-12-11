@@ -5,36 +5,78 @@
     <div class="row">
         <!-- Profile Details Section -->
         <div class="col-12 col-lg-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <img src="{{ asset('storage/photos/'.$client->photo) }}" alt="Client Photo" class="rounded-circle" width="50%" height="120px">
-                    <h3 class="mt-3">{{ $client->full_name }}</h3>
-                    <p>{{ $client->shop_name }}</p>
-                    <p>Email: {{ $client->email }}</p>
-                    <p>Phone: {{ $client->phone }}</p>
-                    <p>Location: {{ $client->location }}</p>
+    <div class="card">
+        <div class="card-body text-center">
+            <!-- Client Photo -->
+            <img src="{{ asset('storage/photos/'.$client->photo) }}" alt="Client Photo" class="rounded-circle mb-3" width="50%" height="120px">
+            
+            <!-- Client Full Name -->
+            <h3 class="mt-3">{{ $client->full_name }}</h3>
+        </div>
+    </div>
 
-                    <!-- ID Photos Display -->
-                    <div class="mt-3">
-                        <h5>ID Photos:</h5>
-                        <div class="d-flex justify-content-center">
-                            @foreach (json_decode($client->id_photos) as $photo)
-                                <img src="{{ asset('storage/id_photos/' . $photo) }}" alt="ID Photo" width="50" class="mx-2 hover-effect">
-                            @endforeach
-                        </div>
-                    </div>
-                    
-                    <!-- Modal Trigger Button -->
-                    <button class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#loanModal">Grant Loan</button>
-                </div>
+    <!-- Shop Name Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <p><strong>Shop Name:</strong> {{ $client->shop_name }}</p>
+        </div>
+    </div>
+
+    <!-- Email Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <p><strong>Email:</strong> {{ $client->email }}</p>
+        </div>
+    </div>
+
+    <!-- Phone Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <p><strong>Phone:</strong> {{ $client->phone }}</p>
+        </div>
+    </div>
+
+    <!-- Location Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <p><strong>Location:</strong> {{ $client->location }}</p>
+        </div>
+    </div>
+
+    <!-- ID Photos Card -->
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5>ID Photos:</h5>
+            <div class="d-flex justify-content-center">
+                @foreach (json_decode($client->id_photos) as $photo)
+                    <img src="{{ asset('storage/id_photos/' . $photo) }}" alt="ID Photo" width="50" class="mx-2 hover-effect">
+                @endforeach
             </div>
         </div>
+    </div>
+
+</div>
+
 
         <!-- Loan History Section -->
         <div class="col-12 col-lg-8">
             <div class="card">
                 <div class="card-body">
-                    <h4>Loan History</h4>
+                <div class="row">
+                    <div class="card mt-3 col-md-5">
+                        <div class="card-body text-center">
+                        <h4>Loan History</h4>
+                        </div>
+                    </div>
+                    <div class=" col-md-2">
+                       
+                    </div>
+                                    <div class="card mt-3 col-md-5">
+                        <div class="card-body text-center">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loanModal">Grant Loan</button>
+                        </div>
+                    </div>
+                    </div>
                     <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -143,8 +185,7 @@
                 <form id="loanForm">
                 @csrf
                     <div class="mb-3">
-                        <label for="client_id" class="form-label">Client ID</label>
-                        <input type="number" class="form-control" id="client_id" name="client_id" value="{{ $client->id }}" required readonly>
+                        <input type="hidden" class="form-control" id="client_id" name="client_id" value="{{ $client->id }}" required readonly>
                     </div>
                     <div class="mb-3">  
                         <label for="loan_amount" class="form-label">Loan Amount</label>
