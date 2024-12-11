@@ -20,7 +20,7 @@ class LoanController extends Controller
     $validated = $request->validate([
         'client_id' => 'required|integer',
         'loan_amount' => 'required|numeric',
-        'loan_duration' => 'required|integer|in:3,4,5', // Restrict to 3, 4, or 5 weeks
+        'loan_duration' => 'required|integer|in:3,4,5,6,7', // Restrict to 3, 4, 5, 6 or 7 weeks
     ]);
     // Calculate constants
     $principal = $validated['loan_amount'];
