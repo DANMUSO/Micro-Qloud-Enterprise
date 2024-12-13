@@ -68,7 +68,7 @@
 										<td>{{$loop->iteration}}</td>
 										<td>{{$loanrequest->employee['name']}}</td>
 										<td>{{$loanrequest->employee['phone_no']}}</td>
-										<td>{{number_format($loanrequest->amount, 2)}}</td>
+										<td>KES {{number_format($loanrequest->amount, 2)}}</td>
 										<td>{{$loanrequest->employee->company['payroll_date']}}</td>
 										
 										<td>{{$loanrequest->created_at}}</td>
