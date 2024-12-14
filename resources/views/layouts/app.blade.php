@@ -195,6 +195,7 @@
 	<script src="{{asset('vertical/assets/plugins/chartjs/js/chart.js')}}"></script>
 	<script src="{{asset('vertical/assets/js/index.js')}}"></script>
 	<!--app JS-->
+	<link rel="icon" href="{{asset('vertical/assets/images/logo3.png')}}" type="image/png"/>
 	<script src="{{asset('vertical/assets/js/app.js')}}"></script>
 	<script>
     $('#applyNowBtn').click(function () {
