@@ -27,6 +27,9 @@
                 <p class="card-text">
                     <strong>Total Amount:</strong> KES {{ number_format(Session::get('employee')['amount'] + (Session::get('employee')['amount'] * 0.3),2) }}
                 </p>
+                <p class="card-text">
+                    <strong>Due Date:</strong> {{Session::get('employee')['company']['payroll_date'] }}
+                </p>
             </div>
         </div><!-- Example loan amount -->
         </div>
