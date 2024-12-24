@@ -257,59 +257,76 @@
 //chart 1
         // Get the context of the canvas element
         var ctx = document.getElementById("chart1").getContext('2d');
-        
-        // Create gradients for the chart lines
-        var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-        gradientStroke1.addColorStop(0, '#6078ea');  
-        gradientStroke1.addColorStop(1, '#17c5ea'); 
 
-        var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-        gradientStroke2.addColorStop(0, '#ff8359');
-        gradientStroke2.addColorStop(1, '#ffdf40');
+// Create gradients for the chart lines
+var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+gradientStroke1.addColorStop(0, '#6078ea');  
+gradientStroke1.addColorStop(1, '#17c5ea'); 
 
-        // Initialize the chart
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: @json($labels),  // Inject the dynamic labels (months)
-                datasets: [{
-                    label: 'Payments',
-                    data: @json($paymentData),  // Inject dynamic data for Payments
-                    borderColor: gradientStroke1,
-                    backgroundColor: gradientStroke1,
-                    hoverBackgroundColor: gradientStroke1,
-                    pointRadius: 0,
-                    fill: false,
-                    borderRadius: 20,
-                    borderWidth: 0
-                }, {
-                    label: 'Disbursement',
-                    data: @json($disbursementData),  // Inject dynamic data for Disbursements
-                    borderColor: gradientStroke2,
-                    backgroundColor: gradientStroke2,
-                    hoverBackgroundColor: gradientStroke2,
-                    pointRadius: 0,
-                    fill: false,
-                    borderRadius: 20,
-                    borderWidth: 0
-                }]
+var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+gradientStroke2.addColorStop(0, '#ff8359');
+gradientStroke2.addColorStop(1, '#ffdf40');
+
+// Initialize the chart
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: @json($labels),  // Inject the dynamic labels (months)
+        datasets: [{
+            label: 'Payments',
+            data: @json($paymentData),  // Inject dynamic data for Payments
+            borderColor: gradientStroke1,
+            backgroundColor: gradientStroke1,
+            hoverBackgroundColor: gradientStroke1,
+            pointRadius: 0,
+            fill: false,
+            borderRadius: 20,
+            borderWidth: 0
+        }, {
+            label: 'Disbursement',
+            data: @json($disbursementData),  // Inject dynamic data for Disbursements
+            borderColor: gradientStroke2,
+            backgroundColor: gradientStroke2,
+            hoverBackgroundColor: gradientStroke2,
+            pointRadius: 0,
+            fill: false,
+            borderRadius: 20,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        maintainAspectRatio: false,
+        barPercentage: 0.5,
+        categoryPercentage: 0.8,
+        plugins: {
+            legend: {
+                display: false,
             },
-            options: {
-                maintainAspectRatio: false,
-                barPercentage: 0.5,
-                categoryPercentage: 0.8,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
+            tooltip: {
+                callbacks: {
+                    // Format the tooltip label
+                    label: function(context) {
+                        let datasetLabel = context.dataset.label || '';
+                        let value = context.raw; // Get the raw value
+                        console.log(`Tooltip value: ${value}`); // Debugging: Check value in console
+                        return `${datasetLabel}: KES ${value.toLocaleString()}`; // Format with KES
                     }
                 }
             }
-        });
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value, index, values) {
+                        return `KES ${value.toLocaleString()}`; // Add KES to Y-axis labels
+                    }
+                }
+            }
+        }
+    }
+});
+
 
 		// chart 2
 
