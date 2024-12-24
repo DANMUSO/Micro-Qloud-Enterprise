@@ -85,9 +85,23 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        // Validate the form input
+    $id = $request->id;
+
+    // Find the existing employee record by ID
+    $employee = Employees::findOrFail($id);
+
+    // Update the employee record with validated data
+    $employee->update([
+        'name' => $request->editname,
+        'email' => $request->editemail,
+        'phone_no' => $request->editphone_no,
+        'amount' => $request->editamount,
+    ]);
+
+    return response()->json(['success' => 'Employee updated successfully']);
     }
 
     /**

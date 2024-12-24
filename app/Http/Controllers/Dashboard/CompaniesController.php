@@ -121,10 +121,26 @@ class CompaniesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request)
+{
+    // Validate the form input
+    $id = $request->id;
+
+    // Find the existing company record by ID
+    $company = Companies::findOrFail($id);
+
+    // Update the company record with validated data
+    $company->update([
+        'company_name' => $request->companyname,
+        'email' => $request->editemail,
+        'phone' => $request->editphone,
+        'payroll_date' => $request->editpayrollDate,
+    ]);
+
+    // Return a JSON response or redirect
+    return response()->json(['success' => 'Company details updated successfully!']);
+}
+
 
     /**
      * Remove the specified resource from storage.

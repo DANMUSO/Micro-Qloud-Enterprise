@@ -34,57 +34,57 @@
 							<div class="d-flex align-items-center">
 								<div>
 									<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
- Add Employee
-</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add Employee
+                </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div id="feedbackMessage" class="alert d-none" role="alert"></div>
-          <!-- resources/views/employees/create_employee.blade.php -->
-<form id="employeeForm">
-    @csrf
-    <div class="form-group">
-        <label for="name">Employee Name</label>
-        <input type="text" class="form-control" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="phone_no">Phone Number</label>
-        <input type="text" class="form-control" id="phone_no" name="phone_no" required>
-    </div>
-    <div class="form-group">
-        <label for="amount">Amount</label>
-        <input type="number" class="form-control" id="amount" name="amount" required>
-    </div>
-    <div class="form-group">
-        <label for="company_id">Company</label>
-        <input type="number" class="form-control" value="{{ $company->id }}" id="company_id" name="company_id" required>
-       
-    </div>
-    <button type="submit" class="btn btn-primary">Add Employee</button>
-</form>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      <div id="feedbackMessage" class="alert d-none" role="alert"></div>
+                          <!-- resources/views/employees/create_employee.blade.php -->
+                <form id="employeeForm">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Employee Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_no">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_no" name="phone_no" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company_id">Company</label>
+                        <input type="number" class="form-control" value="{{ $company->id }}" id="company_id" name="company_id" required>
+                      
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Employee</button>
+                </form>
 
-<!-- Modal for showing alerts -->
-<div id="responseMessage" class="alert alert-success mt-3" style="display: none;"></div>
+                <!-- Modal for showing alerts -->
+                <div id="responseMessage" class="alert alert-success mt-3" style="display: none;"></div>
 
-      </div>
-      
-    </div>
-  </div>
-</div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
 								</div>
 							</div>
                     </div>
@@ -119,6 +119,56 @@
                                       <div class="btn-group" role="group" aria-label="Basic example">
                                     
                                     <button type="button" class="btn btn-outline-danger" onclick="changeActivation({{ $employee->id }}, 'deactivate')">Deactivate</button>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal{{ $employee->id }}">
+                                    Edit 
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Update Employee</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                          <div id="feedbackMessage" class="alert d-none" role="alert"></div>
+                                              <!-- resources/views/employees/create_employee.blade.php -->
+                                    <form id="editemployeeForm">
+                                        @csrf
+                                        <input type="hidden" value="{{ $employee->id }}" class="form-control" id="id" name="id" required>
+                                        <div class="form-group">
+                                            <label for="name">Employee Name</label>
+                                            <input type="text" value="{{ $employee->name }}" class="form-control" id="editname" name="editname" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" value="{{ $employee->email }}" class="form-control" id="editemail" name="editemail" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone_no">Phone Number</label>
+                                            <input type="text" value="{{ $employee->phone_no }}" class="form-control" id="editphone_no" name="editphone_no" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="amount">Amount</label>
+                                            <input type="number" value="{{ $employee->amount }}" class="form-control" id="editamount" name="editamount" required>
+                                        </div>
+                                        <br><br>
+                                        <button type="submit" class="btn btn-primary">Update Employee</button>
+                                    </form>
+
+                                    <!-- Modal for showing alerts -->
+                                    <div id="responseMessage" class="alert alert-success mt-3" style="display: none;"></div>
+
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
                                     </div>
                                       @else
                                       <div class="btn-group" role="group" aria-label="Basic example">

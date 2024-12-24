@@ -21,52 +21,52 @@
 							<div class="d-flex align-items-center">
 								<div>
 									<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
- Add Company
-</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add Company
+                </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Company</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div id="feedbackMessage" class="alert d-none" role="alert"></div>
-           <!-- Company Details Form -->
-           <form id="companyDetailsForm">
-          @csrf
-          <div class="form-group">
-            <label for="companyName">Company Name</label>
-            <input type="text" class="form-control" id="companyName" name="company_name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" name="phone" required>
-          </div>
-          <div class="form-group">
-            <label for="payrollDate">Payroll Date</label>
-            <input type="date" class="form-control" id="payrollDate" name="payroll_date" required>
-          </div>
-          <div class="form-group">
-            <label for="staffCount">Number of Staff</label>
-            <input type="number" class="form-control" id="staffCount" name="staff_count" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Company</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      <div id="feedbackMessage" class="alert d-none" role="alert"></div>
+                          <!-- Company Details Form -->
+                          <form id="companyDetailsForm">
+                          @csrf
+                          <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" name="company_name" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="payrollDate">Payroll Date</label>
+                            <input type="date" class="form-control" id="payrollDate" name="payroll_date" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="staffCount">Number of Staff</label>
+                            <input type="number" class="form-control" id="staffCount" name="staff_count" required>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
 								</div>
 							</div>
                     </div>
@@ -108,11 +108,57 @@
                                       <div class="btn-group" role="group" aria-label="Basic example">
                                     
                                     <button type="button" class="btn btn-outline-danger" onclick="CompanyActivation({{ $company->id }}, 'deactivate')">Deactivate</button>
+                                    <br><br><br>
+                                                     <!-- Button trigger modal -->
+                                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal{{ $company->id }}">
+                                    Edit
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{ $company->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Update Compnay</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                          <div id="editfeedbackMessage" class="alert d-none" role="alert"></div>
+                                              <!-- Company Details Form -->
+                                              <form class="editcompanyDetailsForm">
+                                                @csrf
+                                                <input type="hidden" value="{{ $company->id }}" name="id">
+                                                <div class="form-group">
+                                                    <label for="companyName">Company Name</label>
+                                                    <input type="text" value="{{ $company->company_name }}" class="form-control" name="companyname" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" value="{{ $company->email }}" class="form-control" name="editemail" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phone">Phone</label>
+                                                    <input type="text" value="{{ $company->phone }}" class="form-control" name="editphone" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="payrollDate">Payroll Date</label>
+                                                    <input type="date" value="{{ $company->payroll_date }}" class="form-control" name="editpayrollDate" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
                                     </div>
                                       @else
                                       <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-outline-success" onclick="CompanyActivation({{ $company->id }}, 'activate')">Activate</button>
-                                    
+                                         
                                     </div>
                                       @endif
                 </td>

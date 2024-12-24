@@ -932,7 +932,7 @@ function CompanyActivation(companyId, action) {
 }
 
 	</script>
-	<script>
+    	<script>
   $(document).ready(function() {
     // Handle form submission
     $('#companyDetailsForm').on('submit', function(e) {
@@ -949,7 +949,7 @@ function CompanyActivation(companyId, action) {
           .removeClass('d-none alert-danger')
           .addClass('d-block alert-success')
           .text(response.success); // Display success message
-          
+          location.reload();
         // Optionally, reset the form fields
         $('#companyDetailsForm')[0].reset();
 
@@ -969,6 +969,51 @@ function CompanyActivation(companyId, action) {
     });
   });
 </script>
+<script>
+$(document).ready(function() {
+    // Handle form submission using event delegation
+    $(document).on('submit', '.editcompanyDetailsForm', function(e) {
+        e.preventDefault();  // Prevent the default form submission
+
+        var form = $(this);  // Reference to the form that is being submitted
+        var formData = form.serialize();  // Serialize the form data
+
+        // Send the AJAX request
+        $.ajax({
+            url: "{{ route('update.company') }}",  // The URL to send the request
+            method: 'POST',  // Ensure we're using POST for submission
+            data: formData,  // Send the serialized form data
+            success: function(response) {
+                Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Data updated successfully",
+                        showConfirmButton: false,
+                        timer: 4500
+                    });
+                    location.reload();
+                // Optionally, reset the form fields
+                form[0].reset();
+
+                // Hide the modal after a brief delay
+                setTimeout(function() {
+                    $('#companyDetailsModal').modal('hide');
+                }, 2000);
+            },
+            error: function(xhr) {
+                // Handle error: Display error message
+                var errorMessages = 'There was an error submitting the form. Please try again.';
+                $('#editfeedbackMessage')
+                    .removeClass('d-none alert-success')
+                    .addClass('d-block alert-danger')
+                    .text(errorMessages);
+            }
+        });
+    });
+});
+</script>
+
+
 <script>
 $(document).ready(function() {
     // Handle form submission
@@ -992,6 +1037,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 4500
                     });
+                    location.reload();
                     } else {
                     alert('Something went wrong. Please try again!');
                     }
@@ -1016,6 +1062,68 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+$(document).ready(function() {
+    // Handle form submission for employee edit forms
+    $(document).on('submit', '#editemployeeForm', function(e) {
+        e.preventDefault();
+
+        // Clear any previous alert
+        $('#responseMessage').hide().removeClass('alert-success alert-danger');
+
+        // Serialize form data
+        const formData = $(this).serialize();
+        const employeeId = $(this).find('input[name="id"]').val(); // Get the employee ID
+
+        // Send AJAX request
+        $.ajax({
+            url: '{{ route('employees.update') }}',
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    // Show success notification
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Data updated successfully",
+                        showConfirmButton: false,
+                        timer: 4500
+                    });
+
+                    // Update the table row dynamically
+                    const updatedEmployee = response.employee; // Assuming the updated employee data is returned
+                    $(`#row-${employeeId} .name`).text(updatedEmployee.name);
+                    $(`#row-${employeeId} .email`).text(updatedEmployee.email);
+                    $(`#row-${employeeId} .phone_no`).text(updatedEmployee.phone_no);
+                    $(`#row-${employeeId} .amount`).text(updatedEmployee.amount);
+
+                    // Close the modal
+                    $(`#exampleModal${employeeId}`).modal('hide');
+                } else {
+                    alert('Something went wrong. Please try again!');
+                }
+            },
+            error: function(xhr) {
+                const errors = xhr.responseJSON.errors;
+                let errorMessages = '';
+                for (const field in errors) {
+                    errorMessages += errors[field][0] + '\n';
+                }
+                // Use SweetAlert for displaying errors
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Validation Error",
+                    text: errorMessages,
+                    showConfirmButton: true
+                });
+            }
+        });
+    });
+});
+</script>
+
 	<script>
 		new PerfectScrollbar(".app-container")
 	</script>

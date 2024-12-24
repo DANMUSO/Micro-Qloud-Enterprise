@@ -48,9 +48,11 @@ Route::get('/transactions', [App\Http\Controllers\Dashboard\TransactionsControll
 Route::get('/utilities', [App\Http\Controllers\Dashboard\UtilitiesController::class, 'index'])->name('utilities');
 Route::post('/submit-company', [App\Http\Controllers\Dashboard\CompaniesController::class, 'submitCompanyDetails'])->name('submit.company');
 // routes/web.php
+Route::post('/update-company', [App\Http\Controllers\Dashboard\CompaniesController::class, 'update'])->name('update.company');
 Route::get('/declinedtransactions', [App\Http\Controllers\Dashboard\TransactionsController::class, 'declined'])->name('declinedtransactions');
 Route::get('/companies/{company}/staff', [App\Http\Controllers\Dashboard\CompaniesController::class, 'showStaff'])->name('companies.staff');
 Route::post('employees', [App\Http\Controllers\Dashboard\EmployeesController::class, 'store'])->name('employees.store');
+Route::post('employeesupdate', [App\Http\Controllers\Dashboard\EmployeesController::class, 'edit'])->name('employees.update');
 Route::post('/transaction/store', [App\Http\Controllers\Dashboard\TransactionsController::class, 'store'])->name('transaction.store');
 Route::post('/loanrequest/status/{id}', [App\Http\Controllers\Dashboard\TransactionsController::class, 'update']);
 Route::post('/employee/activation/{id}', [App\Http\Controllers\Dashboard\EmployeesController::class, 'update']);
