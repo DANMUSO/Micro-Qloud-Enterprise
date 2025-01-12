@@ -27,7 +27,7 @@ class Loanrequest extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address("loan@qloudpointsolutions.com", "Qloud Point Solutions Ltd"),
+            from: new Address("loan@qloudpointsolutions.com", "Micro Qloud Enterprise Ltd"),
             subject: 'Loan Request - Staff is requesting for loan.'
         );
     }

@@ -29,7 +29,7 @@ class ClientCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address("loan@qloudpointsolutions.com", "Qloud Point Solutions Ltd"),
+            from: new Address("loan@qloudpointsolutions.com", "Micro Qloud Enterprise Ltd"),
             subject: 'Business Loan - Your account has been created successfully.'
         );
     }
