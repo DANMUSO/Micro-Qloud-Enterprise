@@ -35,44 +35,43 @@ class HomeController extends Controller
        
         $role = $user->role; 
         if($role == 2){
-              // Get the current date and the date 12 months ago
-          // Fetch all payments grouped by YEAR and MONTH
-            $payments = Transactions::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount + profit) as total_payment')
-                ->where('status', 4)
-                ->groupBy('year', 'month')
-                ->orderBy('year')
-                ->orderBy('month')
-                ->get();
+// Fetch all payments grouped by YEAR, MONTH, and DAY based on updated_at and status = 4
+$payments = Transactions::selectRaw('DATE_FORMAT(updated_at, "%d/%m/%Y") as full_date, YEAR(updated_at) as year, MONTH(updated_at) as month, SUM(amount + profit) as total_payment')
+    ->where('status', 4)
+    ->groupBy('full_date', 'year', 'month')
+    ->orderBy('year')
+    ->orderBy('month')
+    ->get();
 
-            // Fetch all disbursements grouped by YEAR and MONTH
-            $disbursements = Transactions::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_disbursement')
-                ->where('status', 2)
-                ->groupBy('year', 'month')
-                ->orderBy('year')
-                ->orderBy('month')
-                ->get();
+// Fetch all disbursements grouped by YEAR, MONTH, and DAY
+$disbursements = Transactions::selectRaw('DATE_FORMAT(created_at, "%d/%m/%Y") as full_date, YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_disbursement')
+    ->where('status', 2)
+    ->groupBy('full_date', 'year', 'month')
+    ->orderBy('year')
+    ->orderBy('month')
+    ->get();
 
-            // Initialize arrays for data
-            $labels = []; // To hold 'Month/Year' labels
-            $paymentData = []; // To hold payment values
-            $disbursementData = []; // To hold disbursement values
+// Initialize arrays for data
+$labels = []; // To hold 'Day/Month/Year' labels
+$paymentData = []; // To hold payment values
+$disbursementData = []; // To hold disbursement values
 
-            // Process payments and disbursements to match data by Month/Year
-            $paymentMap = $payments->keyBy(function ($item) {
-                return $item->month . '/' . $item->year;
-            });
-            $disbursementMap = $disbursements->keyBy(function ($item) {
-                return $item->month . '/' . $item->year;
-            });
+// Process payments and disbursements to match data by full date
+$paymentMap = $payments->keyBy(function ($item) {
+    return $item->full_date;
+});
+$disbursementMap = $disbursements->keyBy(function ($item) {
+    return $item->full_date;
+});
 
-            // Loop through each unique Month/Year from both payments and disbursements
-            $allMonthsYears = $paymentMap->keys()->merge($disbursementMap->keys())->unique();
+// Loop through each unique full date from both payments and disbursements
+$allFullDates = $paymentMap->keys()->merge($disbursementMap->keys())->unique();
 
-            foreach ($allMonthsYears as $monthYear) {
-                $labels[] = $monthYear;
-                $paymentData[] = isset($paymentMap[$monthYear]) ? $paymentMap[$monthYear]->total_payment : 0;
-                $disbursementData[] = isset($disbursementMap[$monthYear]) ? $disbursementMap[$monthYear]->total_disbursement : 0;
-            }
+foreach ($allFullDates as $fullDate) {
+    $labels[] = $fullDate; // Use the full date format for the label
+    $paymentData[] = isset($paymentMap[$fullDate]) ? $paymentMap[$fullDate]->total_payment : 0;
+    $disbursementData[] = isset($disbursementMap[$fullDate]) ? $disbursementMap[$fullDate]->total_disbursement : 0;
+}
             $disbursement = Transactions::select('amount', "profit")->where('status', 2)->get();
             $paid = Transactions::select('amount', "profit")->where('status', 4)->get();
             $olb = Transactions::select('amount', "profit")->where('status', 5)->get();
