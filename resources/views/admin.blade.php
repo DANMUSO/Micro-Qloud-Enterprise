@@ -260,12 +260,12 @@
 
 // Create gradients for the chart lines
 var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-gradientStroke1.addColorStop(0, '#6078ea');  
-gradientStroke1.addColorStop(1, '#17c5ea'); 
+gradientStroke1.addColorStop(0, '#32CD32');  
+gradientStroke1.addColorStop(1, '#32CD32'); 
 
 var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-gradientStroke2.addColorStop(0, '#ff8359');
-gradientStroke2.addColorStop(1, '#ffdf40');
+gradientStroke2.addColorStop(0, '#ffa500');
+gradientStroke2.addColorStop(1, '#ffa500');
 
 // Initialize the chart
 var myChart = new Chart(ctx, {

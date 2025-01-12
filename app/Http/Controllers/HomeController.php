@@ -35,38 +35,38 @@ class HomeController extends Controller
        
         $role = $user->role; 
         if($role == 2){
-// Fetch all payments grouped by YEAR, MONTH, and DAY based on updated_at and status = 4
-$payments = Transactions::selectRaw('DATE_FORMAT(updated_at, "%Y-%m-%d") as full_date, SUM(amount + profit) as total_payment')
-    ->where('status', 4)
-    ->groupBy('full_date')
-    ->orderByRaw('DATE_FORMAT(updated_at, "%Y-%m-%d") ASC')
-    ->get();
+           // Fetch all payments grouped by full date (updated_at) with status = 4
+            $payments = Transactions::selectRaw('DATE_FORMAT(updated_at, "%Y-%m-%d") as full_date, SUM(amount + profit) as total_payment')
+            ->where('status', 4)
+            ->groupBy('full_date')
+            ->orderByRaw('DATE_FORMAT(updated_at, "%Y-%m-%d") ASC')
+            ->get();
 
-// Fetch all disbursements grouped by YEAR, MONTH, and DAY
-$disbursements = Transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m-%d") as full_date, SUM(amount) as total_disbursement')
-    ->where('status', 2)
-    ->groupBy('full_date')
-    ->orderByRaw('DATE_FORMAT(created_at, "%Y-%m-%d") ASC')
-    ->get();
+            // Fetch all disbursements grouped by full date (created_at) with status = 2
+            $disbursements = Transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m-%d") as full_date, SUM(amount) as total_disbursement')
+            ->where('status', 2)
+            ->groupBy('full_date')
+            ->orderByRaw('DATE_FORMAT(created_at, "%Y-%m-%d") ASC')
+            ->get();
 
-// Initialize arrays for data
-$labels = []; // To hold 'Year-Month-Day' labels
-$paymentData = []; // To hold payment values
-$disbursementData = []; // To hold disbursement values
+            // Initialize arrays for chart data
+            $labels = []; // To hold 'Year-Month-Day' labels
+            $paymentData = []; // To hold payment values
+            $disbursementData = []; // To hold disbursement values
 
-// Process payments and disbursements to match data by full date
-$paymentMap = $payments->keyBy('full_date');
-$disbursementMap = $disbursements->keyBy('full_date');
+            // Map payments and disbursements by full date
+            $paymentMap = $payments->keyBy('full_date');
+            $disbursementMap = $disbursements->keyBy('full_date');
 
-// Merge all unique dates and sort them
-$allFullDates = $paymentMap->keys()->merge($disbursementMap->keys())->unique()->sort();
+            // Merge all unique dates from payments and disbursements, then sort them chronologically
+            $allFullDates = $paymentMap->keys()->merge($disbursementMap->keys())->unique()->sort();
 
-// Prepare data for the chart
-foreach ($allFullDates as $fullDate) {
-    $labels[] = $fullDate; // Use the full date format for the label
-    $paymentData[] = $paymentMap->get($fullDate)->total_payment ?? 0;
-    $disbursementData[] = $disbursementMap->get($fullDate)->total_disbursement ?? 0;
-}
+            // Loop through all unique dates and prepare chart data
+            foreach ($allFullDates as $fullDate) {
+            $labels[] = $fullDate; // Add the date as a label
+            $paymentData[] = $paymentMap->get($fullDate)->total_payment ?? 0; // Use 0 if no payment for this date
+            $disbursementData[] = $disbursementMap->get($fullDate)->total_disbursement ?? 0; // Use 0 if no disbursement for this date
+            }
             $disbursement = Transactions::select('amount', "profit")->where('status', 2)->get();
             $paid = Transactions::select('amount', "profit")->where('status', 4)->get();
             $olb = Transactions::select('amount', "profit")->where('status', 5)->get();
