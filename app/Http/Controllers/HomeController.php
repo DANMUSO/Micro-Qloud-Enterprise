@@ -36,36 +36,43 @@ class HomeController extends Controller
         $role = $user->role; 
         if($role == 2){
               // Get the current date and the date 12 months ago
-                $currentMonth = Carbon::now();
-                $last12Months = Carbon::now()->subMonths(12);
-                        // Get the Payments data (status 2) for the last 12 months
-                $paymentsv1 = Transactions::selectRaw('sum(amount + profit) as total_payment, MONTH(created_at) as month')
-                        ->where('status', 4)
-                        ->whereBetween('created_at', [$last12Months, $currentMonth])
-                        ->groupBy('month')
-                        ->pluck('total_payment', 'month');
+          // Fetch all payments grouped by YEAR and MONTH
+            $payments = Transactions::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount + profit) as total_payment')
+                ->where('status', 4)
+                ->groupBy('year', 'month')
+                ->orderBy('year')
+                ->orderBy('month')
+                ->get();
 
-            // Get the Disbursement data (status 4) for the last 12 months
-            $disbursementsv1 = Transactions::selectRaw('sum(amount) as total_amount, MONTH(created_at) as month')
+            // Fetch all disbursements grouped by YEAR and MONTH
+            $disbursements = Transactions::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_disbursement')
                 ->where('status', 2)
-                ->whereBetween('created_at', [$last12Months, $currentMonth])
-                ->groupBy('month')
-                ->pluck('total_amount', 'month');
+                ->groupBy('year', 'month')
+                ->orderBy('year')
+                ->orderBy('month')
+                ->get();
 
-            // Initialize arrays for Payments and Disbursements data
-            $paymentData = [];
-            $disbursementData = [];
+            // Initialize arrays for data
+            $labels = []; // To hold 'Month/Year' labels
+            $paymentData = []; // To hold payment values
+            $disbursementData = []; // To hold disbursement values
 
-            // Loop through the last 12 months and populate the data arrays
-            for ($month = 1; $month <= 12; $month++) {
-                $paymentData[] = isset($paymentsv1[$month]) ? $paymentsv1[$month] : 0;
-                $disbursementData[] = isset($disbursementsv1[$month]) ? $disbursementsv1[$month] : 0;
+            // Process payments and disbursements to match data by Month/Year
+            $paymentMap = $payments->keyBy(function ($item) {
+                return $item->month . '/' . $item->year;
+            });
+            $disbursementMap = $disbursements->keyBy(function ($item) {
+                return $item->month . '/' . $item->year;
+            });
+
+            // Loop through each unique Month/Year from both payments and disbursements
+            $allMonthsYears = $paymentMap->keys()->merge($disbursementMap->keys())->unique();
+
+            foreach ($allMonthsYears as $monthYear) {
+                $labels[] = $monthYear;
+                $paymentData[] = isset($paymentMap[$monthYear]) ? $paymentMap[$monthYear]->total_payment : 0;
+                $disbursementData[] = isset($disbursementMap[$monthYear]) ? $disbursementMap[$monthYear]->total_disbursement : 0;
             }
-
-            // Set up the chart labels for the last 12 months
-            $labels = [
-                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-            ];
             $disbursement = Transactions::select('amount', "profit")->where('status', 2)->get();
             $paid = Transactions::select('amount', "profit")->where('status', 4)->get();
             $olb = Transactions::select('amount', "profit")->where('status', 5)->get();
