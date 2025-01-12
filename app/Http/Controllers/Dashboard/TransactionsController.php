@@ -9,6 +9,7 @@ use App\Models\Employees;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Loanrequest;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\Paymentupdate;
 class TransactionsController extends Controller
 {
     public function __construct()
@@ -21,17 +22,23 @@ class TransactionsController extends Controller
     public function index()
     {
         $staff = Auth::user();
-        $staff_id = $staff->email;
-        $employee = Employees::where('email', $staff_id)->first();
+        $staff_email = $staff->email;
+        $employee = Employees::where('email', $staff_email)->first();
         $transactions = Transactions::where('employee_id', $employee->id)->latest()->get();
        
         return view('Staff.Transactions', compact('transactions') );
     }
     public function updateStatus(Request $request){
-        $transaction = Transactions::find($request->id);
+        $id = $request->id;
+        
+        $transaction = Transactions::find($id);
         $transaction->status = $request->status;
-    
+        
         if ($transaction->save()) {
+            $payment = Transactions::with('employee')->where('id', $id)->first();
+            $email = $payment ->employee->email;
+            $amount =  $payment->amount + $payment->profit;
+            Mail::to($email)->send(new Paymentupdate($amount));
             return response()->json(['success' => true, 'message' => 'Transaction status updated successfully.']);
         } else {
             return response()->json(['success' => false, 'message' => 'Failed to update transaction status.']);

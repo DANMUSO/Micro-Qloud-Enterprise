@@ -87,7 +87,7 @@ class OnboardedclientsController extends Controller
             'name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'password' => $hashedPassword,
-            'role' =>  4, //Client ROLE ID
+            'role' =>  '4', //Client ROLE ID
         ]);
     // Send email with the generated password
     Mail::to($client->email)->send(new ClientCreated($client, $plainPassword));
