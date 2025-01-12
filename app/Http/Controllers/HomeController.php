@@ -36,41 +36,36 @@ class HomeController extends Controller
         $role = $user->role; 
         if($role == 2){
 // Fetch all payments grouped by YEAR, MONTH, and DAY based on updated_at and status = 4
-$payments = Transactions::selectRaw('DATE_FORMAT(updated_at, "%d/%m/%Y") as full_date, YEAR(updated_at) as year, MONTH(updated_at) as month, SUM(amount + profit) as total_payment')
+$payments = Transactions::selectRaw('DATE_FORMAT(updated_at, "%Y-%m-%d") as full_date, SUM(amount + profit) as total_payment')
     ->where('status', 4)
-    ->groupBy('full_date', 'year', 'month')
-    ->orderBy('year')
-    ->orderBy('month')
+    ->groupBy('full_date')
+    ->orderByRaw('DATE_FORMAT(updated_at, "%Y-%m-%d") ASC')
     ->get();
 
 // Fetch all disbursements grouped by YEAR, MONTH, and DAY
-$disbursements = Transactions::selectRaw('DATE_FORMAT(created_at, "%d/%m/%Y") as full_date, YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total_disbursement')
+$disbursements = Transactions::selectRaw('DATE_FORMAT(created_at, "%Y-%m-%d") as full_date, SUM(amount) as total_disbursement')
     ->where('status', 2)
-    ->groupBy('full_date', 'year', 'month')
-    ->orderBy('year')
-    ->orderBy('month')
+    ->groupBy('full_date')
+    ->orderByRaw('DATE_FORMAT(created_at, "%Y-%m-%d") ASC')
     ->get();
 
 // Initialize arrays for data
-$labels = []; // To hold 'Day/Month/Year' labels
+$labels = []; // To hold 'Year-Month-Day' labels
 $paymentData = []; // To hold payment values
 $disbursementData = []; // To hold disbursement values
 
 // Process payments and disbursements to match data by full date
-$paymentMap = $payments->keyBy(function ($item) {
-    return $item->full_date;
-});
-$disbursementMap = $disbursements->keyBy(function ($item) {
-    return $item->full_date;
-});
+$paymentMap = $payments->keyBy('full_date');
+$disbursementMap = $disbursements->keyBy('full_date');
 
-// Loop through each unique full date from both payments and disbursements
-$allFullDates = $paymentMap->keys()->merge($disbursementMap->keys())->unique();
+// Merge all unique dates and sort them
+$allFullDates = $paymentMap->keys()->merge($disbursementMap->keys())->unique()->sort();
 
+// Prepare data for the chart
 foreach ($allFullDates as $fullDate) {
     $labels[] = $fullDate; // Use the full date format for the label
-    $paymentData[] = isset($paymentMap[$fullDate]) ? $paymentMap[$fullDate]->total_payment : 0;
-    $disbursementData[] = isset($disbursementMap[$fullDate]) ? $disbursementMap[$fullDate]->total_disbursement : 0;
+    $paymentData[] = $paymentMap->get($fullDate)->total_payment ?? 0;
+    $disbursementData[] = $disbursementMap->get($fullDate)->total_disbursement ?? 0;
 }
             $disbursement = Transactions::select('amount', "profit")->where('status', 2)->get();
             $paid = Transactions::select('amount', "profit")->where('status', 4)->get();
